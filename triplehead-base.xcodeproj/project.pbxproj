@@ -7,16 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B1440CD16E7F92E00836D41 /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1440BA16E7F92E00836D41 /* SyphonNameboundClient.m */; };
-		5B1440CE16E7F92E00836D41 /* ofxSyphonClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B1440BD16E7F92E00836D41 /* ofxSyphonClient.mm */; };
-		5B1440CF16E7F92E00836D41 /* ofxSyphonServer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B1440BF16E7F92E00836D41 /* ofxSyphonServer.mm */; };
-		5B1440D316E7F96D00836D41 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B1440AD16E7F92E00836D41 /* Syphon.framework */; };
-		5B1440D416E7F97F00836D41 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1440AD16E7F92E00836D41 /* Syphon.framework */; };
-		5B15C1CD16D2CA8E004E20D4 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */; };
-		5B78A8EC16E8717E00CBDB28 /* radomeSyphonClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78A8EA16E8717E00CBDB28 /* radomeSyphonClient.cpp */; };
 		5B78A8EF16E88B7500CBDB28 /* radome.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B78A8ED16E88ACC00CBDB28 /* radome.icns */; };
-		5B78AA6616E9CD4A00CBDB28 /* radomeProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AA6416E9CD4A00CBDB28 /* radomeProjector.cpp */; };
-		5B78AA6916EA94A600CBDB28 /* radomeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AA6716EA94A600CBDB28 /* radomeUtils.cpp */; };
+		5B78AA6916EA94A600CBDB28 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AA6716EA94A600CBDB28 /* utils.cpp */; };
 		5B78ABBA16EAA96C00CBDB28 /* libGhost32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B78AB7B16EAA96B00CBDB28 /* libGhost32.a */; };
 		5B78ABBF16EAA96C00CBDB28 /* ofxDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AB8816EAA96B00CBDB28 /* ofxDisplay.cpp */; };
 		5B78ABC016EAA96C00CBDB28 /* ofxDisplayManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AB8B16EAA96B00CBDB28 /* ofxDisplayManager.cpp */; };
@@ -25,19 +17,10 @@
 		5B78ABC316EAA96C00CBDB28 /* ofxFensterCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AB9016EAA96B00CBDB28 /* ofxFensterCanvas.cpp */; };
 		5B78ABC416EAA96C00CBDB28 /* ofxFensterManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AB9216EAA96B00CBDB28 /* ofxFensterManager.cpp */; };
 		5B78ABD216EAAB9F00CBDB28 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78ABD116EAAB9F00CBDB28 /* main.cpp */; };
-		5B78ABD516EB19D200CBDB28 /* radomeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */; };
-		5BD6E52016D9BC2C00C39777 /* turntableCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */; };
 		5BEE6CCF16D358A0007786AB /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BEE6CC816D358A0007786AB /* tinyxml.cpp */; };
 		5BEE6CD016D358A0007786AB /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BEE6CCA16D358A0007786AB /* tinyxmlerror.cpp */; };
 		5BEE6CD116D358A0007786AB /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BEE6CCB16D358A0007786AB /* tinyxmlparser.cpp */; };
 		5BEE6CD216D358A0007786AB /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BEE6CCD16D358A0007786AB /* ofxXmlSettings.cpp */; };
-		5BF5F23516D186110026DF72 /* assimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BF5F22F16D186110026DF72 /* assimp.a */; };
-		5BF5F23616D186110026DF72 /* ofxAssimpModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F23316D186110026DF72 /* ofxAssimpModelLoader.cpp */; };
-		5BF5F23F16D186690026DF72 /* CubeMap.frag in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F23A16D186690026DF72 /* CubeMap.frag */; };
-		5BF5F24016D186690026DF72 /* CubeMap.vert in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F23B16D186690026DF72 /* CubeMap.vert */; };
-		5BF5F24116D186690026DF72 /* ofxCubeMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F23D16D186690026DF72 /* ofxCubeMap.cpp */; };
-		5BF5F24516D1A68E0026DF72 /* radome.frag in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F24316D1A68E0026DF72 /* radome.frag */; };
-		5BF5F24616D1A68E0026DF72 /* radome.vert in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F24416D1A68E0026DF72 /* radome.vert */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -49,7 +32,7 @@
 		E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9770E8CC7DD009D7055 /* CoreServices.framework */; };
 		E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9790E8CC7DD009D7055 /* OpenGL.framework */; };
 		E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */; };
-		E4B69E210A3A1BDC003C02F2 /* radomeApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* radomeApp.cpp */; };
+		E4B69E210A3A1BDC003C02F2 /* app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* app.cpp */; };
 		E4C2424710CC5A17004149E2 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424410CC5A17004149E2 /* AppKit.framework */; };
 		E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424510CC5A17004149E2 /* Cocoa.framework */; };
 		E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424610CC5A17004149E2 /* IOKit.framework */; };
@@ -94,31 +77,15 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */,
-				5B1440D316E7F96D00836D41 /* Syphon.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5B1440AD16E7F92E00836D41 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
-		5B1440B716E7F92E00836D41 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
-		5B1440B916E7F92E00836D41 /* SyphonNameboundClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyphonNameboundClient.h; sourceTree = "<group>"; };
-		5B1440BA16E7F92E00836D41 /* SyphonNameboundClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyphonNameboundClient.m; sourceTree = "<group>"; };
-		5B1440BB16E7F92E00836D41 /* ofxSyphon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSyphon.h; sourceTree = "<group>"; };
-		5B1440BC16E7F92E00836D41 /* ofxSyphonClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSyphonClient.h; sourceTree = "<group>"; };
-		5B1440BD16E7F92E00836D41 /* ofxSyphonClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxSyphonClient.mm; sourceTree = "<group>"; };
-		5B1440BE16E7F92E00836D41 /* ofxSyphonServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSyphonServer.h; sourceTree = "<group>"; };
-		5B1440BF16E7F92E00836D41 /* ofxSyphonServer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxSyphonServer.mm; sourceTree = "<group>"; };
-		5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
-		5B15C1CC16D2CA8E004E20D4 /* icosohedron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = icosohedron.h; sourceTree = "<group>"; };
-		5B78A8EA16E8717E00CBDB28 /* radomeSyphonClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeSyphonClient.cpp; sourceTree = "<group>"; };
-		5B78A8EB16E8717E00CBDB28 /* radomeSyphonClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeSyphonClient.h; sourceTree = "<group>"; };
 		5B78A8ED16E88ACC00CBDB28 /* radome.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = radome.icns; path = resources/macos/radome.icns; sourceTree = "<group>"; };
-		5B78AA6416E9CD4A00CBDB28 /* radomeProjector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeProjector.cpp; sourceTree = "<group>"; };
-		5B78AA6516E9CD4A00CBDB28 /* radomeProjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeProjector.h; sourceTree = "<group>"; };
-		5B78AA6716EA94A600CBDB28 /* radomeUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeUtils.cpp; sourceTree = "<group>"; };
-		5B78AA6816EA94A600CBDB28 /* radomeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeUtils.h; sourceTree = "<group>"; };
+		5B78AA6716EA94A600CBDB28 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
+		5B78AA6816EA94A600CBDB28 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		5B78AB4016EAA96B00CBDB28 /* GHOST_DisplayManagerCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOST_DisplayManagerCocoa.h; sourceTree = "<group>"; };
 		5B78AB4116EAA96B00CBDB28 /* GHOST_SystemCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOST_SystemCocoa.h; sourceTree = "<group>"; };
 		5B78AB4216EAA96B00CBDB28 /* GHOST_SystemPathsCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOST_SystemPathsCocoa.h; sourceTree = "<group>"; };
@@ -185,10 +152,6 @@
 		5B78AB9216EAA96B00CBDB28 /* ofxFensterManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFensterManager.cpp; sourceTree = "<group>"; };
 		5B78AB9316EAA96B00CBDB28 /* ofxFensterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFensterManager.h; sourceTree = "<group>"; };
 		5B78ABD116EAAB9F00CBDB28 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeModel.cpp; sourceTree = "<group>"; };
-		5B78ABD416EB19D200CBDB28 /* radomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeModel.h; sourceTree = "<group>"; };
-		5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = turntableCam.cpp; sourceTree = "<group>"; };
-		5BD6E51F16D9BC2C00C39777 /* turntableCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turntableCam.h; sourceTree = "<group>"; };
 		5BEE6BFC16D35423007786AB /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
 		5BEE6BFD16D35423007786AB /* ofxUI2DPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI2DPad.h; sourceTree = "<group>"; };
 		5BEE6BFE16D35423007786AB /* ofxUIBaseDraws.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIBaseDraws.h; sourceTree = "<group>"; };
@@ -236,55 +199,6 @@
 		5BEE6CCB16D358A0007786AB /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		5BEE6CCD16D358A0007786AB /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		5BEE6CCE16D358A0007786AB /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
-		5BF5F20416D186110026DF72 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
-		5BF5F20816D186110026DF72 /* aiAnim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiAnim.h; sourceTree = "<group>"; };
-		5BF5F20916D186110026DF72 /* aiAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiAssert.h; sourceTree = "<group>"; };
-		5BF5F20A16D186110026DF72 /* aiCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiCamera.h; sourceTree = "<group>"; };
-		5BF5F20B16D186110026DF72 /* aiColor4D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiColor4D.h; sourceTree = "<group>"; };
-		5BF5F20C16D186110026DF72 /* aiColor4D.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aiColor4D.inl; sourceTree = "<group>"; };
-		5BF5F20D16D186110026DF72 /* aiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiConfig.h; sourceTree = "<group>"; };
-		5BF5F20E16D186110026DF72 /* aiDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiDefines.h; sourceTree = "<group>"; };
-		5BF5F20F16D186110026DF72 /* aiFileIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiFileIO.h; sourceTree = "<group>"; };
-		5BF5F21016D186110026DF72 /* aiLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiLight.h; sourceTree = "<group>"; };
-		5BF5F21116D186110026DF72 /* aiMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiMaterial.h; sourceTree = "<group>"; };
-		5BF5F21216D186110026DF72 /* aiMaterial.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aiMaterial.inl; sourceTree = "<group>"; };
-		5BF5F21316D186110026DF72 /* aiMatrix3x3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiMatrix3x3.h; sourceTree = "<group>"; };
-		5BF5F21416D186110026DF72 /* aiMatrix3x3.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aiMatrix3x3.inl; sourceTree = "<group>"; };
-		5BF5F21516D186110026DF72 /* aiMatrix4x4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiMatrix4x4.h; sourceTree = "<group>"; };
-		5BF5F21616D186110026DF72 /* aiMatrix4x4.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aiMatrix4x4.inl; sourceTree = "<group>"; };
-		5BF5F21716D186110026DF72 /* aiMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiMesh.h; sourceTree = "<group>"; };
-		5BF5F21816D186110026DF72 /* aiPostProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiPostProcess.h; sourceTree = "<group>"; };
-		5BF5F21916D186110026DF72 /* aiQuaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiQuaternion.h; sourceTree = "<group>"; };
-		5BF5F21A16D186110026DF72 /* aiScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiScene.h; sourceTree = "<group>"; };
-		5BF5F21B16D186110026DF72 /* aiTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiTexture.h; sourceTree = "<group>"; };
-		5BF5F21C16D186110026DF72 /* aiTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiTypes.h; sourceTree = "<group>"; };
-		5BF5F21D16D186110026DF72 /* aiVector2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiVector2D.h; sourceTree = "<group>"; };
-		5BF5F21E16D186110026DF72 /* aiVector3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiVector3D.h; sourceTree = "<group>"; };
-		5BF5F21F16D186110026DF72 /* aiVector3D.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aiVector3D.inl; sourceTree = "<group>"; };
-		5BF5F22016D186110026DF72 /* aiVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aiVersion.h; sourceTree = "<group>"; };
-		5BF5F22116D186110026DF72 /* assimp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assimp.h; sourceTree = "<group>"; };
-		5BF5F22216D186110026DF72 /* assimp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = assimp.hpp; sourceTree = "<group>"; };
-		5BF5F22416D186110026DF72 /* poppack1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = poppack1.h; sourceTree = "<group>"; };
-		5BF5F22516D186110026DF72 /* pushpack1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pushpack1.h; sourceTree = "<group>"; };
-		5BF5F22616D186110026DF72 /* DefaultLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLogger.h; sourceTree = "<group>"; };
-		5BF5F22716D186110026DF72 /* IOStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOStream.h; sourceTree = "<group>"; };
-		5BF5F22816D186110026DF72 /* IOSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSystem.h; sourceTree = "<group>"; };
-		5BF5F22916D186110026DF72 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
-		5BF5F22A16D186110026DF72 /* LogStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogStream.h; sourceTree = "<group>"; };
-		5BF5F22B16D186110026DF72 /* NullLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NullLogger.h; sourceTree = "<group>"; };
-		5BF5F22C16D186110026DF72 /* ProgressHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHandler.h; sourceTree = "<group>"; };
-		5BF5F22F16D186110026DF72 /* assimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = assimp.a; sourceTree = "<group>"; };
-		5BF5F23116D186110026DF72 /* ofx3DBaseLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofx3DBaseLoader.h; sourceTree = "<group>"; };
-		5BF5F23216D186110026DF72 /* ofxAssimpMeshHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAssimpMeshHelper.h; sourceTree = "<group>"; };
-		5BF5F23316D186110026DF72 /* ofxAssimpModelLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAssimpModelLoader.cpp; sourceTree = "<group>"; };
-		5BF5F23416D186110026DF72 /* ofxAssimpModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAssimpModelLoader.h; sourceTree = "<group>"; };
-		5BF5F23816D186690026DF72 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		5BF5F23A16D186690026DF72 /* CubeMap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CubeMap.frag; sourceTree = "<group>"; };
-		5BF5F23B16D186690026DF72 /* CubeMap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CubeMap.vert; sourceTree = "<group>"; };
-		5BF5F23D16D186690026DF72 /* ofxCubeMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCubeMap.cpp; sourceTree = "<group>"; };
-		5BF5F23E16D186690026DF72 /* ofxCubeMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCubeMap.h; sourceTree = "<group>"; };
-		5BF5F24316D1A68E0026DF72 /* radome.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.frag; sourceTree = "<group>"; };
-		5BF5F24416D1A68E0026DF72 /* radome.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.vert; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -296,9 +210,9 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* radomeDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = radomeDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4B69E1E0A3A1BDC003C02F2 /* radomeApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = radomeApp.cpp; path = src/radomeApp.cpp; sourceTree = SOURCE_ROOT; };
-		E4B69E1F0A3A1BDC003C02F2 /* radomeApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = radomeApp.h; path = src/radomeApp.h; sourceTree = SOURCE_ROOT; };
+		E4B69B5B0A3A1756003C02F2 /* triplehead-baseDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "triplehead-baseDebug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69E1E0A3A1BDC003C02F2 /* app.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = app.cpp; path = src/app.cpp; sourceTree = SOURCE_ROOT; };
+		E4B69E1F0A3A1BDC003C02F2 /* app.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = app.h; path = src/app.h; sourceTree = SOURCE_ROOT; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		E4C2424510CC5A17004149E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -332,8 +246,6 @@
 				E4C2424810CC5A17004149E2 /* Cocoa.framework in Frameworks */,
 				E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */,
 				E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */,
-				5B1440D416E7F97F00836D41 /* Syphon.framework in Frameworks */,
-				5BF5F23516D186110026DF72 /* assimp.a in Frameworks */,
 				5B78ABBA16EAA96C00CBDB28 /* libGhost32.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,103 +253,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5B14409616E7F92E00836D41 /* ofxSyphon */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440A916E7F92E00836D41 /* libs */,
-				5B1440B216E7F92E00836D41 /* src */,
-			);
-			name = ofxSyphon;
-			path = ../../../addons/ofxSyphon;
-			sourceTree = "<group>";
-		};
-		5B1440A916E7F92E00836D41 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440AA16E7F92E00836D41 /* Syphon */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		5B1440AA16E7F92E00836D41 /* Syphon */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440AB16E7F92E00836D41 /* lib */,
-			);
-			path = Syphon;
-			sourceTree = "<group>";
-		};
-		5B1440AB16E7F92E00836D41 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440AC16E7F92E00836D41 /* osx */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		5B1440AC16E7F92E00836D41 /* osx */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440AD16E7F92E00836D41 /* Syphon.framework */,
-			);
-			path = osx;
-			sourceTree = "<group>";
-		};
-		5B1440B216E7F92E00836D41 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440B316E7F92E00836D41 /* libs */,
-				5B1440BB16E7F92E00836D41 /* ofxSyphon.h */,
-				5B1440BC16E7F92E00836D41 /* ofxSyphonClient.h */,
-				5B1440BD16E7F92E00836D41 /* ofxSyphonClient.mm */,
-				5B1440BE16E7F92E00836D41 /* ofxSyphonServer.h */,
-				5B1440BF16E7F92E00836D41 /* ofxSyphonServer.mm */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		5B1440B316E7F92E00836D41 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440B416E7F92E00836D41 /* Syphon */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		5B1440B416E7F92E00836D41 /* Syphon */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440B516E7F92E00836D41 /* lib */,
-				5B1440B816E7F92E00836D41 /* src */,
-			);
-			path = Syphon;
-			sourceTree = "<group>";
-		};
-		5B1440B516E7F92E00836D41 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440B616E7F92E00836D41 /* osx */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		5B1440B616E7F92E00836D41 /* osx */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440B716E7F92E00836D41 /* Syphon.framework */,
-			);
-			path = osx;
-			sourceTree = "<group>";
-		};
-		5B1440B816E7F92E00836D41 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				5B1440B916E7F92E00836D41 /* SyphonNameboundClient.h */,
-				5B1440BA16E7F92E00836D41 /* SyphonNameboundClient.m */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		5B78AA6A16EAA96B00CBDB28 /* ofxFenster */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,146 +501,9 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		5BF5F20316D186110026DF72 /* ofxAssimpModelLoader */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F20416D186110026DF72 /* install.xml */,
-				5BF5F20516D186110026DF72 /* libs */,
-				5BF5F23016D186110026DF72 /* src */,
-			);
-			name = ofxAssimpModelLoader;
-			path = ../../../addons/ofxAssimpModelLoader;
-			sourceTree = "<group>";
-		};
-		5BF5F20516D186110026DF72 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F20616D186110026DF72 /* assimp */,
-			);
-			path = libs;
-			sourceTree = "<group>";
-		};
-		5BF5F20616D186110026DF72 /* assimp */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F20716D186110026DF72 /* include */,
-				5BF5F22D16D186110026DF72 /* lib */,
-			);
-			path = assimp;
-			sourceTree = "<group>";
-		};
-		5BF5F20716D186110026DF72 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F20816D186110026DF72 /* aiAnim.h */,
-				5BF5F20916D186110026DF72 /* aiAssert.h */,
-				5BF5F20A16D186110026DF72 /* aiCamera.h */,
-				5BF5F20B16D186110026DF72 /* aiColor4D.h */,
-				5BF5F20C16D186110026DF72 /* aiColor4D.inl */,
-				5BF5F20D16D186110026DF72 /* aiConfig.h */,
-				5BF5F20E16D186110026DF72 /* aiDefines.h */,
-				5BF5F20F16D186110026DF72 /* aiFileIO.h */,
-				5BF5F21016D186110026DF72 /* aiLight.h */,
-				5BF5F21116D186110026DF72 /* aiMaterial.h */,
-				5BF5F21216D186110026DF72 /* aiMaterial.inl */,
-				5BF5F21316D186110026DF72 /* aiMatrix3x3.h */,
-				5BF5F21416D186110026DF72 /* aiMatrix3x3.inl */,
-				5BF5F21516D186110026DF72 /* aiMatrix4x4.h */,
-				5BF5F21616D186110026DF72 /* aiMatrix4x4.inl */,
-				5BF5F21716D186110026DF72 /* aiMesh.h */,
-				5BF5F21816D186110026DF72 /* aiPostProcess.h */,
-				5BF5F21916D186110026DF72 /* aiQuaternion.h */,
-				5BF5F21A16D186110026DF72 /* aiScene.h */,
-				5BF5F21B16D186110026DF72 /* aiTexture.h */,
-				5BF5F21C16D186110026DF72 /* aiTypes.h */,
-				5BF5F21D16D186110026DF72 /* aiVector2D.h */,
-				5BF5F21E16D186110026DF72 /* aiVector3D.h */,
-				5BF5F21F16D186110026DF72 /* aiVector3D.inl */,
-				5BF5F22016D186110026DF72 /* aiVersion.h */,
-				5BF5F22116D186110026DF72 /* assimp.h */,
-				5BF5F22216D186110026DF72 /* assimp.hpp */,
-				5BF5F22316D186110026DF72 /* Compiler */,
-				5BF5F22616D186110026DF72 /* DefaultLogger.h */,
-				5BF5F22716D186110026DF72 /* IOStream.h */,
-				5BF5F22816D186110026DF72 /* IOSystem.h */,
-				5BF5F22916D186110026DF72 /* Logger.h */,
-				5BF5F22A16D186110026DF72 /* LogStream.h */,
-				5BF5F22B16D186110026DF72 /* NullLogger.h */,
-				5BF5F22C16D186110026DF72 /* ProgressHandler.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		5BF5F22316D186110026DF72 /* Compiler */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F22416D186110026DF72 /* poppack1.h */,
-				5BF5F22516D186110026DF72 /* pushpack1.h */,
-			);
-			path = Compiler;
-			sourceTree = "<group>";
-		};
-		5BF5F22D16D186110026DF72 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F22E16D186110026DF72 /* osx */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		5BF5F22E16D186110026DF72 /* osx */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F22F16D186110026DF72 /* assimp.a */,
-			);
-			path = osx;
-			sourceTree = "<group>";
-		};
-		5BF5F23016D186110026DF72 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F23116D186110026DF72 /* ofx3DBaseLoader.h */,
-				5BF5F23216D186110026DF72 /* ofxAssimpMeshHelper.h */,
-				5BF5F23316D186110026DF72 /* ofxAssimpModelLoader.cpp */,
-				5BF5F23416D186110026DF72 /* ofxAssimpModelLoader.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		5BF5F23716D186690026DF72 /* ofxCubeMap */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F23816D186690026DF72 /* README.md */,
-				5BF5F23916D186690026DF72 /* shaders */,
-				5BF5F23C16D186690026DF72 /* src */,
-			);
-			name = ofxCubeMap;
-			path = ../../../addons/ofxCubeMap;
-			sourceTree = "<group>";
-		};
-		5BF5F23916D186690026DF72 /* shaders */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F23A16D186690026DF72 /* CubeMap.frag */,
-				5BF5F23B16D186690026DF72 /* CubeMap.vert */,
-			);
-			path = shaders;
-			sourceTree = "<group>";
-		};
-		5BF5F23C16D186690026DF72 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				5BF5F23D16D186690026DF72 /* ofxCubeMap.cpp */,
-				5BF5F23E16D186690026DF72 /* ofxCubeMap.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
 		5BF5F24216D1A68E0026DF72 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				5BF5F24316D1A68E0026DF72 /* radome.frag */,
-				5BF5F24416D1A68E0026DF72 /* radome.vert */,
 			);
 			name = data;
 			path = bin/data;
@@ -835,9 +513,6 @@
 			isa = PBXGroup;
 			children = (
 				5B78AA6A16EAA96B00CBDB28 /* ofxFenster */,
-				5B14409616E7F92E00836D41 /* ofxSyphon */,
-				5BF5F23716D186690026DF72 /* ofxCubeMap */,
-				5BF5F20316D186110026DF72 /* ofxAssimpModelLoader */,
 				5BEE6A8316D35422007786AB /* ofxUI */,
 				5BEE6CC616D358A0007786AB /* ofxXmlSettings */,
 			);
@@ -902,7 +577,7 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				E4B69B5B0A3A1756003C02F2 /* radomeDebug.app */,
+				E4B69B5B0A3A1756003C02F2 /* triplehead-baseDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -910,20 +585,10 @@
 			isa = PBXGroup;
 			children = (
 				5B78ABD116EAAB9F00CBDB28 /* main.cpp */,
-				5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */,
-				5BD6E51F16D9BC2C00C39777 /* turntableCam.h */,
-				5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */,
-				5B15C1CC16D2CA8E004E20D4 /* icosohedron.h */,
-				E4B69E1E0A3A1BDC003C02F2 /* radomeApp.cpp */,
-				E4B69E1F0A3A1BDC003C02F2 /* radomeApp.h */,
-				5B78A8EA16E8717E00CBDB28 /* radomeSyphonClient.cpp */,
-				5B78A8EB16E8717E00CBDB28 /* radomeSyphonClient.h */,
-				5B78AA6416E9CD4A00CBDB28 /* radomeProjector.cpp */,
-				5B78AA6516E9CD4A00CBDB28 /* radomeProjector.h */,
-				5B78AA6716EA94A600CBDB28 /* radomeUtils.cpp */,
-				5B78AA6816EA94A600CBDB28 /* radomeUtils.h */,
-				5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */,
-				5B78ABD416EB19D200CBDB28 /* radomeModel.h */,
+				E4B69E1E0A3A1BDC003C02F2 /* app.cpp */,
+				E4B69E1F0A3A1BDC003C02F2 /* app.h */,
+				5B78AA6716EA94A600CBDB28 /* utils.cpp */,
+				5B78AA6816EA94A600CBDB28 /* utils.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -940,9 +605,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4B69B5A0A3A1756003C02F2 /* radome */ = {
+		E4B69B5A0A3A1756003C02F2 /* triplehead-base */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "radome" */;
+			buildConfigurationList = E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "triplehead-base" */;
 			buildPhases = (
 				E4B69B580A3A1756003C02F2 /* Sources */,
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
@@ -955,9 +620,9 @@
 			dependencies = (
 				E4EEB9AC138B136A00A80321 /* PBXTargetDependency */,
 			);
-			name = radome;
+			name = "triplehead-base";
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* radomeDebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* triplehead-baseDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -965,7 +630,7 @@
 /* Begin PBXProject section */
 		E4B69B4C0A3A1720003C02F2 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "radome" */;
+			buildConfigurationList = E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "triplehead-base" */;
 			compatibilityVersion = "Xcode 2.4";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -986,7 +651,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				E4B69B5A0A3A1756003C02F2 /* radome */,
+				E4B69B5A0A3A1756003C02F2 /* triplehead-base */,
 			);
 		};
 /* End PBXProject section */
@@ -1022,25 +687,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4B69E210A3A1BDC003C02F2 /* radomeApp.cpp in Sources */,
-				5BF5F23616D186110026DF72 /* ofxAssimpModelLoader.cpp in Sources */,
-				5BF5F23F16D186690026DF72 /* CubeMap.frag in Sources */,
-				5BF5F24016D186690026DF72 /* CubeMap.vert in Sources */,
-				5BF5F24116D186690026DF72 /* ofxCubeMap.cpp in Sources */,
-				5BF5F24516D1A68E0026DF72 /* radome.frag in Sources */,
-				5BF5F24616D1A68E0026DF72 /* radome.vert in Sources */,
-				5B15C1CD16D2CA8E004E20D4 /* icosohedron.cpp in Sources */,
+				E4B69E210A3A1BDC003C02F2 /* app.cpp in Sources */,
 				5BEE6CCF16D358A0007786AB /* tinyxml.cpp in Sources */,
 				5BEE6CD016D358A0007786AB /* tinyxmlerror.cpp in Sources */,
 				5BEE6CD116D358A0007786AB /* tinyxmlparser.cpp in Sources */,
 				5BEE6CD216D358A0007786AB /* ofxXmlSettings.cpp in Sources */,
-				5BD6E52016D9BC2C00C39777 /* turntableCam.cpp in Sources */,
-				5B1440CD16E7F92E00836D41 /* SyphonNameboundClient.m in Sources */,
-				5B1440CE16E7F92E00836D41 /* ofxSyphonClient.mm in Sources */,
-				5B1440CF16E7F92E00836D41 /* ofxSyphonServer.mm in Sources */,
-				5B78A8EC16E8717E00CBDB28 /* radomeSyphonClient.cpp in Sources */,
-				5B78AA6616E9CD4A00CBDB28 /* radomeProjector.cpp in Sources */,
-				5B78AA6916EA94A600CBDB28 /* radomeUtils.cpp in Sources */,
+				5B78AA6916EA94A600CBDB28 /* utils.cpp in Sources */,
 				5B78ABBF16EAA96C00CBDB28 /* ofxDisplay.cpp in Sources */,
 				5B78ABC016EAA96C00CBDB28 /* ofxDisplayManager.cpp in Sources */,
 				5B78ABC116EAA96C00CBDB28 /* ofxDisplayManagerMac.mm in Sources */,
@@ -1048,7 +700,6 @@
 				5B78ABC316EAA96C00CBDB28 /* ofxFensterCanvas.cpp in Sources */,
 				5B78ABC416EAA96C00CBDB28 /* ofxFensterManager.cpp in Sources */,
 				5B78ABD216EAAB9F00CBDB28 /* main.cpp in Sources */,
-				5B78ABD516EB19D200CBDB28 /* radomeModel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1232,7 +883,7 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6 = "\"$(SRCROOT)/../../../addons/ofxFenster/libs/ghost/lib/win_cb\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7 = "\"$(SRCROOT)/../../../addons/ofxFenster/libs/ghost/lib/win_vs\"";
 				PREBINDING = NO;
-				PRODUCT_NAME = radomeDebug;
+				PRODUCT_NAME = "triplehead-baseDebug";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1338,7 +989,7 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6 = "\"$(SRCROOT)/../../../addons/ofxFenster/libs/ghost/lib/win_cb\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7 = "\"$(SRCROOT)/../../../addons/ofxFenster/libs/ghost/lib/win_vs\"";
 				PREBINDING = NO;
-				PRODUCT_NAME = radome;
+				PRODUCT_NAME = "triplehead-base";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1346,7 +997,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "radome" */ = {
+		E4B69B4D0A3A1720003C02F2 /* Build configuration list for PBXProject "triplehead-base" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B4E0A3A1720003C02F2 /* Debug */,
@@ -1355,7 +1006,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "radome" */ = {
+		E4B69B5F0A3A1757003C02F2 /* Build configuration list for PBXNativeTarget "triplehead-base" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4B69B600A3A1757003C02F2 /* Debug */,

@@ -15,8 +15,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
                BuildableName = "radome.app"
-               BlueprintName = "radome"
-               ReferencedContainer = "container:radome.xcodeproj">
+               BlueprintName = "triplehead-base"
+               ReferencedContainer = "container:triplehead-base.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,8 +33,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "radome.app"
-            BlueprintName = "radome"
-            ReferencedContainer = "container:radome.xcodeproj">
+            BlueprintName = "triplehead-base"
+            ReferencedContainer = "container:triplehead-base.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,8 +52,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "radome.app"
-            BlueprintName = "radome"
-            ReferencedContainer = "container:radome.xcodeproj">
+            BlueprintName = "triplehead-base"
+            ReferencedContainer = "container:triplehead-base.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,8 +70,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "radome.app"
-            BlueprintName = "radome"
-            ReferencedContainer = "container:radome.xcodeproj">
+            BlueprintName = "triplehead-base"
+            ReferencedContainer = "container:triplehead-base.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

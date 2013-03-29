@@ -1,13 +1,9 @@
 //
-//  radomeUtils.h
-//  radome
+//  utils.h
 //
 //  Created by Michael Dewberry on 3/8/13.
 //
 //
-
-#ifndef __radome__radomeUtils__
-#define __radome__radomeUtils__
 
 #include <list>
 #include <vector>
@@ -37,5 +33,3 @@ void addRadioAndSetFirstItem(ofxUICanvas* pUI, std::string id, vector<string> op
 bool matchRadioButton(string widgetName, vector<string> names, int* pValue);
 
 float frand_bounded();
-
-#endif /* defined(__radome__radomeUtils__) */

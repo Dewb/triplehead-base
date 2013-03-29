@@ -1,12 +1,11 @@
 //
-//  radomeUtils.cpp
-//  radome
+//  utils.cpp
 //
 //  Created by Michael Dewberry on 3/8/13.
 //
 //
 
-#include "radomeUtils.h"
+#include "utils.h"
 #include "ofxUI.h"
 
 void addRadioAndSetFirstItem(ofxUICanvas* pUI, string id, vector<string> options, int orientation, int w, int h)
