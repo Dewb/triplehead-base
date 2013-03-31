@@ -1,8 +1,25 @@
 #include "app.h"
 #include "utils.h"
 #include "ofxFensterManager.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-#define SIDEBAR_WIDTH 140
+#define SIDEBAR_WIDTH 300
+
+#define FBO_WIDTH 800
+#define FBO_HEIGHT 600
+
+#define FRAME_RATE_MAX 90
+#define FRAME_DELAY_MAX 60
+#define FRAME_LOOP_MAX 90
+#define FRAME_ADVANCE_MAX 30
+#define STR(x) #x
+#define STRINGIFY(x) STR(x)
+#define FRAME_RATE_MAX_STR STRINGIFY(FRAME_RATE_MAX)
+#define FRAME_DELAY_MAX_STR STRINGIFY(FRAME_DELAY_MAX)
+#define FRAME_LOOP_MAX_STR STRINGIFY(FRAME_LOOP_MAX)
+#define FRAME_ADVANCE_MAX_STR STRINGIFY(FRAME_ADVANCE_MAX)
+
 
 thbApp::thbApp() {
     _pUI = NULL;
@@ -19,27 +36,62 @@ thbApp::~thbApp() {
     }    
 }
 
+void thbApp::initBuffer() {
+    ofPushStyle();
+    _nFrameBufferSize = FRAME_DELAY_MAX*2 + FRAME_LOOP_MAX + FRAME_ADVANCE_MAX;
+    for(int ii=0; ii<_nFrameBufferSize; ii++) {
+        ofFbo fbo;
+        fbo.allocate(FBO_WIDTH, FBO_HEIGHT, GL_RGB);
+        fbo.begin();
+        ofClear(0,0,0);
+        fbo.end();
+        _buffer.push_back(fbo);
+    }
+    ofPopStyle();
+    _bufferCaret = 0;
+}
+
+void thbApp::blankBuffer() {
+    ofPushStyle();
+    for(int ii=0; ii<_nFrameBufferSize; ii++) {
+        _buffer[ii].begin();
+        ofClear(0,0,0);
+        _buffer[ii].end();
+    }
+    ofPopStyle();
+}
+
+
 void thbApp::setup() {
     
-    ofxFensterManager::get()->setWindowTitle("untitled effect");
+    ofxFensterManager::get()->setWindowTitle("kung fu stutter");
     
     ofSetFrameRate(45);
     ofEnableSmoothing();
     
     _fullscreen = false;
     
+    _nFrameDelay = 5;
+    _nFrameLoop = 15;
+    _nFrameAdvance = 2;
+
+    initBuffer();
+    
+    loadFile();
+        
     initGUI();
 }
 
 void thbApp::initGUI() {
-    _pUI = new ofxUICanvas(5, 0, SIDEBAR_WIDTH, ofGetHeight());
+    _pUI = new ofxUICanvas(15, 0, SIDEBAR_WIDTH, ofGetHeight());
     _pUI->setWidgetSpacing(5.0);
-    _pUI->setDrawBack(true);
+    _pUI->setDrawBack(false);
     
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    _pUI->addWidgetDown(new ofxUILabel("untitled effect", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("kung fu stutter @dewb", OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
     
+    /*
     _radioANames.push_back("Option 1");
     _radioANames.push_back("Option 2");
     _radioANames.push_back("Option 3");
@@ -52,27 +104,47 @@ void thbApp::initGUI() {
     _radioBNames.push_back("Option 3");
     addRadioAndSetFirstItem(_pUI, "RADIO B", _radioBNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
     _pUI->addSpacer(0, 12);
-
-    _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_MEDIUM));
-    _pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
+    */
+     
+    _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
 
-    _pUI->addWidgetDown(new ofxUILabel("BUTTONS", OFX_UI_FONT_MEDIUM));
-    _pUI->addWidgetDown(new ofxUILabelButton("Foo...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
-    _pUI->addWidgetDown(new ofxUILabelButton("Bar...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
-    _pUI->addWidgetDown(new ofxUILabelButton("Baz...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
+    _pUI->addWidgetDown(new ofxUILabel("SOURCE VIDEO", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabelButton("Load...", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabelButton("<<", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetRight(new ofxUILabelButton(">>", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
 
-    _pUI->addWidgetDown(new ofxUILabel("FADER", OFX_UI_FONT_MEDIUM));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 100, _sliderValue*100.0, "XFADE", "2D", "3D", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel("PLAYBACK SPEED", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, ofGetFrameRate()/(FRAME_RATE_MAX*1.0),
+                                               "FRAME RATE", "0", FRAME_RATE_MAX_STR, OFX_UI_FONT_LARGE));
+
+    char buf[100];
+    _pUI->addWidgetDown(new ofxUILabel("DELAY", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, _nFrameDelay/(FRAME_DELAY_MAX*1.0),
+                                               "DELAY", "0", FRAME_DELAY_MAX_STR, OFX_UI_FONT_LARGE));
+
+    _pUI->addWidgetDown(new ofxUILabel("LOOP LENGTH", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, _nFrameLoop/(FRAME_LOOP_MAX*1.0),
+                                               "LOOP", "0", FRAME_LOOP_MAX_STR, OFX_UI_FONT_LARGE));
+
+    _pUI->addWidgetDown(new ofxUILabel("ADVANCE", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, _nFrameAdvance/(FRAME_ADVANCE_MAX*1.0),
+                                               "ADVANCE", "0", FRAME_ADVANCE_MAX_STR, OFX_UI_FONT_LARGE));
+
     
-    ofBackground(40, 20, 32);
+    ofBackground(255, 20, 32);
 
     ofAddListener(_pUI->newGUIEvent, this, &thbApp::guiEvent);
 }
 
 void thbApp::loadFile() {
     ofFileDialogResult result = ofSystemLoadDialog("Load File", false, "");
+    
+    if (result.bSuccess) {
+        initNewMovie(result.filePath);
+    }
     
     // Workaround for ofxFenster modal mouse event bug
     ofxFenster* pWin = ofxFensterManager::get()->getActiveWindow();
@@ -81,9 +153,6 @@ void thbApp::loadFile() {
     ofxFensterManager::get()->setActiveWindow(pWin);
     ofxFensterManager::get()->deleteFenster(pDummy);
     
-    if (result.bSuccess) {
-
-    }
 }
 
 void thbApp::showProjectorWindow() {
@@ -96,20 +165,77 @@ void thbApp::showProjectorWindow() {
     _projectorWindow->setWindowTitle("Projector Output");
 }
 
-void thbApp::update() {
+void thbApp::initNewMovie(string file) {
+    _player.loadMovie(file);
+    
+    blankBuffer();
+    _nCurrentFrame = 0;
+    _nCurrentLoopStart = 0;
+    _bufferCaret = 0;
+    bufferMovieFrames(_nFrameLoop+2*_nFrameDelay);
 }
 
+void thbApp::bufferMovieFrames(int n) {
+    //printf("Loading %d frames into buffer at %d (size %d)\n", n, _bufferCaret, _nFrameBufferSize);
+    ofPushStyle();
+    for (int ii=0; ii < n; ii++) {
+        _player.nextFrame();
+        _player.update();
+        _bufferCaret = (_bufferCaret+1) % _nFrameBufferSize;
+        _buffer[_bufferCaret].begin();
+        _player.draw(0, 0, FBO_WIDTH, FBO_HEIGHT);
+        _buffer[_bufferCaret].end();
+    }
+    ofPopStyle();
+}
+
+void thbApp::jumpFrames(int n) {
+    float pos = (_player.getCurrentFrame() + n) / (_player.getTotalNumFrames() * 1.0);
+    if (pos < 0) pos = 0.0;
+    if (pos > 1.0) pos = 1.0;
+    _player.setPosition(pos);
+    _nCurrentFrame = 0;
+    _nCurrentLoopStart = 0;
+    _bufferCaret = 0;
+    bufferMovieFrames(_nFrameLoop+2*_nFrameDelay);
+}
+
+void thbApp::update() {
+    //printf("s: %d e: %d - %d\n", _nCurrentLoopStart, _nCurrentLoopStart + _nFrameLoop, _nCurrentFrame);
+    if (_nCurrentFrame == (_nCurrentLoopStart + _nFrameLoop - 1) % _nFrameBufferSize) {
+        _nCurrentLoopStart = (_nCurrentLoopStart + _nFrameAdvance) % _nFrameBufferSize;
+        _nCurrentFrame = _nCurrentLoopStart;
+        bufferMovieFrames(_nFrameAdvance);
+    } else {
+        _nCurrentFrame = (_nCurrentFrame+1) % _nFrameBufferSize;
+    }
+}
 
 void thbApp::drawProjectorOutput(int w, int h) {
-     // draw to triplehead window here
+    if (_buffer.size() == 0)
+        return;
+    
+    int i = 0;
+    int N = _nFrameBufferSize;
+    
+    auto left = _buffer[_nCurrentFrame];
+    auto mid = _buffer[(_nCurrentFrame + _nFrameDelay) % N];
+    auto right = _buffer[(_nCurrentFrame + 2 * _nFrameDelay) % N];
+    
+    ofPushStyle();
+    left.draw(0, 0, w/3, h);
+    mid.draw(w/3, 0, w/3, h);
+    right.draw(2*w/3, 0, w/3, h);
+    ofPopStyle();
 }
 
 
 void thbApp::draw() {
-    
-    glDisable(GL_DEPTH_TEST);
+    //drawProjectorOutput(900,200);
+    //glDisable(GL_DEPTH_TEST);
+    ofClear(180,0,80);
     _pUI->draw();
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
 }
 
 void thbApp::keyPressed(int key) {
@@ -119,6 +245,11 @@ void thbApp::keyPressed(int key) {
             {
                 _fullscreen = !_fullscreen;
                 ofSetFullscreen(_fullscreen);
+            }
+            break;
+        case 'l':
+            {
+                loadFile();
             }
             break;
         case 'p':
@@ -154,16 +285,43 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
     if (matchRadioButton(name, _radioBNames, &_radioB))
         return;
     
-    if (name == "XFADE") {
+    if (name == "FRAME RATE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _sliderValue = slider->getValue();
+            ofSetFrameRate(slider->getValue() * FRAME_RATE_MAX);
         }
-    } else if (name == "Foo...") {
+    } else if (name == "DELAY") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _nFrameDelay = slider->getValue() * FRAME_DELAY_MAX;
+        }
+    } else if (name == "LOOP") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _nFrameLoop = slider->getValue() * FRAME_LOOP_MAX;
+        }
+    } else if (name == "ADVANCE") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _nFrameAdvance = slider->getValue() * FRAME_ADVANCE_MAX;
+        }
+    } else if (name == "Load...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton && !pButton->getValue())
         {
             loadFile();
+        }
+    } else if (name == "<<") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton && !pButton->getValue())
+        {
+            jumpFrames(-900); // assume roughly 30fps source
+        }
+    } else if (name == ">>") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton && !pButton->getValue())
+        {
+            jumpFrames(900); // assume roughly 30fps source
         }
     } else if (name == "Show Window") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);

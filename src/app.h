@@ -27,6 +27,12 @@ protected:
     void initGUI();
     void guiEvent(ofxUIEventArgs &e);
     
+    void initBuffer();
+    void blankBuffer();
+    void initNewMovie(std::string file);
+    void bufferMovieFrames(int n);
+    void jumpFrames(int n);
+    
     ofxUICanvas* _pUI;
     
     ofxFenster* _projectorWindow;
@@ -34,10 +40,21 @@ protected:
     bool _fullscreen;
     int _radioA;
     int _radioB;
-    float _sliderValue;
+    
+    int _nFrameBufferSize;
+    int _nFrameDelay;
+    int _nFrameLoop;
+    int _nFrameAdvance;
+    
+    int _nCurrentFrame;
+    int _nCurrentLoopStart;
+    
     vector<string> _radioANames;
     vector<string> _radioBNames;
     
+    int _bufferCaret;
+    vector<ofFbo> _buffer;
+    ofVideoPlayer _player;
 };
 
 class projectorWindowListener : public ofxFensterListener {
