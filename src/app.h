@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxUI.h"
 #include "ofxFenster.h"
+#include "ofxOscReceiver.h"
 
 class thbApp : public ofBaseApp {
 public:
@@ -49,12 +50,16 @@ protected:
     int _nCurrentFrame;
     int _nCurrentLoopStart;
     
+    int _nFrameCushion;
+    
     vector<string> _radioANames;
     vector<string> _radioBNames;
     
     int _bufferCaret;
     vector<ofFbo> _buffer;
     ofVideoPlayer _player;
+    
+    ofxOscReceiver _osc;
 };
 
 class projectorWindowListener : public ofxFensterListener {

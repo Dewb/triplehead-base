@@ -64,17 +64,21 @@ void thbApp::blankBuffer() {
 
 void thbApp::setup() {
     
-    ofxFensterManager::get()->setWindowTitle("kung fu stutter");
+    ofxFensterManager::get()->setWindowTitle("kung fu montanez");
     
     ofSetFrameRate(45);
     ofEnableSmoothing();
     
     _fullscreen = false;
     
-    _nFrameDelay = 5;
-    _nFrameLoop = 15;
-    _nFrameAdvance = 2;
-
+    _osc.setup(30274);
+    
+    _nFrameDelay = 7;
+    _nFrameLoop = 10;
+    _nFrameAdvance = 3;
+    
+    _nFrameCushion = 0;
+    
     initBuffer();
     
     loadFile();
@@ -88,7 +92,7 @@ void thbApp::initGUI() {
     _pUI->setDrawBack(false);
     
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    _pUI->addWidgetDown(new ofxUILabel("kung fu stutter @dewb", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("kung fu montanez   @dewb", OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
     
     /*
@@ -175,8 +179,16 @@ void thbApp::initNewMovie(string file) {
     bufferMovieFrames(_nFrameLoop+2*_nFrameDelay);
 }
 
-void thbApp::bufferMovieFrames(int n) {
+void thbApp::bufferMovieFrames(int requestedFrames) {
+    int n = requestedFrames;
     //printf("Loading %d frames into buffer at %d (size %d)\n", n, _bufferCaret, _nFrameBufferSize);
+    if (n > _nFrameCushion) {
+        n -= _nFrameCushion;
+        _nFrameCushion = 0;
+    } else if (_nFrameCushion > 0) {
+        _nFrameCushion -= n;
+        return;
+    }
     ofPushStyle();
     for (int ii=0; ii < n; ii++) {
         _player.nextFrame();
@@ -201,6 +213,7 @@ void thbApp::jumpFrames(int n) {
 }
 
 void thbApp::update() {
+    
     //printf("s: %d e: %d - %d\n", _nCurrentLoopStart, _nCurrentLoopStart + _nFrameLoop, _nCurrentFrame);
     if (_nCurrentFrame == (_nCurrentLoopStart + _nFrameLoop - 1) % _nFrameBufferSize) {
         _nCurrentLoopStart = (_nCurrentLoopStart + _nFrameAdvance) % _nFrameBufferSize;
@@ -208,6 +221,26 @@ void thbApp::update() {
         bufferMovieFrames(_nFrameAdvance);
     } else {
         _nCurrentFrame = (_nCurrentFrame+1) % _nFrameBufferSize;
+    }
+    
+    while (_osc.hasWaitingMessages()) {
+        ofxOscMessage msg;
+        if(_osc.getNextMessage(&msg)) {
+            string addr = msg.getAddress();
+            if (addr == "/montanez/fps") {
+                ofSetFrameRate(msg.getArgAsInt32(0));
+                updateSlider(_pUI, "FRAME RATE", 0, FRAME_RATE_MAX, ofGetFrameRate());
+            } else if (addr == "/montanez/delay") {
+                _nFrameDelay = msg.getArgAsInt32(0);
+                updateSlider(_pUI, "DELAY", 0, FRAME_DELAY_MAX, _nFrameDelay);
+            } else if (addr == "/montanez/loop") {
+                _nFrameLoop = msg.getArgAsInt32(0);
+                updateSlider(_pUI, "LOOP", 0, FRAME_LOOP_MAX, _nFrameLoop);
+            } else if (addr == "/montanez/advance") {
+                _nFrameAdvance = msg.getArgAsInt32(0);
+                updateSlider(_pUI, "ADVANCE", 0, FRAME_ADVANCE_MAX, _nFrameAdvance);
+            }
+        }
     }
 }
 
@@ -293,12 +326,24 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
     } else if (name == "DELAY") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _nFrameDelay = slider->getValue() * FRAME_DELAY_MAX;
+            int newDelay = slider->getValue() * FRAME_DELAY_MAX;
+            if (newDelay > _nFrameDelay) {
+                bufferMovieFrames(2 * (newDelay - _nFrameDelay));
+            } else {
+                _nFrameCushion += _nFrameDelay - newDelay;
+            }
+            _nFrameDelay = newDelay;
         }
     } else if (name == "LOOP") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _nFrameLoop = slider->getValue() * FRAME_LOOP_MAX;
+            int newLoop = slider->getValue() * FRAME_LOOP_MAX;
+            if (newLoop > _nFrameLoop) {
+                bufferMovieFrames(newLoop - _nFrameLoop);
+            } else {
+                _nFrameCushion += _nFrameLoop - newLoop;
+            }
+            _nFrameLoop = newLoop;
         }
     } else if (name == "ADVANCE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
