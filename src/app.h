@@ -24,6 +24,8 @@ public:
     void mouseMoved(int x, int y);
 
 protected:
+    void initCoords();
+
     void initGUI();
     void guiEvent(ofxUIEventArgs &e);
     
@@ -32,11 +34,18 @@ protected:
     ofxFenster* _projectorWindow;
     
     bool _fullscreen;
+
     int _radioA;
     int _radioB;
-    float _sliderValue;
     vector<string> _radioANames;
     vector<string> _radioBNames;
+    
+    float _fSpeed;
+    float _fZoom;
+    bool _bAlpha;
+    
+    ofImage _sourceImage;
+    vector<ofVec3f> _pixelCoords;
     
 };
 
