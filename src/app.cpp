@@ -10,9 +10,9 @@
 #define FBO_HEIGHT 600
 
 #define FRAME_RATE_MAX 90
-#define FRAME_DELAY_MAX 60
-#define FRAME_LOOP_MAX 90
-#define FRAME_ADVANCE_MAX 30
+#define FRAME_DELAY_MAX 30
+#define FRAME_LOOP_MAX 30
+#define FRAME_ADVANCE_MAX 10
 #define STR(x) #x
 #define STRINGIFY(x) STR(x)
 #define FRAME_RATE_MAX_STR STRINGIFY(FRAME_RATE_MAX)
@@ -39,6 +39,7 @@ thbApp::~thbApp() {
 void thbApp::initBuffer() {
     ofPushStyle();
     _nFrameBufferSize = FRAME_DELAY_MAX*2 + FRAME_LOOP_MAX + FRAME_ADVANCE_MAX;
+    //_nFrameBufferSize = 90;
     for(int ii=0; ii<_nFrameBufferSize; ii++) {
         ofFbo fbo;
         fbo.allocate(FBO_WIDTH, FBO_HEIGHT, GL_RGB);
