@@ -4,6 +4,7 @@
 #include "ofxUI.h"
 #include "ofxFenster.h"
 #include "ofxOscReceiver.h"
+#include "ofxSyphonServer.h"
 
 class thbApp : public ofBaseApp {
 public:
@@ -64,6 +65,9 @@ protected:
     ofVideoPlayer _player;
     
     ofxOscReceiver _osc;
+    
+    ofFbo _syphonFrame;
+    ofxSyphonServer _syphonServer;
 };
 
 class projectorWindowListener : public ofxFensterListener {

@@ -18,6 +18,7 @@
 #define FRAME_LOOP_MAX_STR STRINGIFY(FRAME_LOOP_MAX)
 #define FRAME_ADVANCE_MAX_STR STRINGIFY(FRAME_ADVANCE_MAX)
 
+#define USE_SYPHON
 
 thbApp::thbApp() {
     _pUI = NULL;
@@ -72,6 +73,11 @@ void thbApp::setup() {
     
     _osc.setup(30274);
     
+#ifdef USE_SYPHON
+    _syphonFrame.allocate(3840, 800, GL_RGB);
+    _syphonServer.setName("kfm");
+#endif
+    
     _nFrameDelay = 7;
     _nFrameLoop = 10;
     _nFrameAdvance = 3;
@@ -93,7 +99,7 @@ void thbApp::initGUI() {
     _pUI->setDrawBack(false);
     
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    _pUI->addWidgetDown(new ofxUILabel("Kung Fu Montanez by @dewb", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("Kung Fu Montanez - @dewb", OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
      
     _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_LARGE));
@@ -247,6 +253,8 @@ void thbApp::update() {
 void thbApp::drawProjectorOutput(int w, int h) {
     if (_buffer.size() == 0)
         return;
+
+    ofClear(0,0,0);
     
     int i = 0;
     int N = _nFrameBufferSize;
@@ -265,11 +273,15 @@ void thbApp::drawProjectorOutput(int w, int h) {
 
 
 void thbApp::draw() {
-    //drawProjectorOutput(900,200);
-    //glDisable(GL_DEPTH_TEST);
     ofClear(180,0,80);
     _pUI->draw();
-    //glEnable(GL_DEPTH_TEST);
+
+#ifdef USE_SYPHON
+    _syphonFrame.begin();
+    drawProjectorOutput(_syphonFrame.getWidth(), _syphonFrame.getHeight());
+    _syphonFrame.end();
+    _syphonServer.publishTexture(&(_syphonFrame.getTextureReference()));
+#endif
 }
 
 void thbApp::keyPressed(int key) {
