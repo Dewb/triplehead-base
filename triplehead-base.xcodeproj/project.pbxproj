@@ -20,7 +20,7 @@
 		5B71EAB91714D90700C26FD8 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B71EAA91714D90700C26FD8 /* ofxOscMessage.cpp */; };
 		5B71EABA1714D90700C26FD8 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B71EAAB1714D90700C26FD8 /* ofxOscReceiver.cpp */; };
 		5B71EABB1714D90700C26FD8 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B71EAAD1714D90700C26FD8 /* ofxOscSender.cpp */; };
-		5B78A8EF16E88B7500CBDB28 /* radome.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B78A8ED16E88ACC00CBDB28 /* radome.icns */; };
+		5B78A8EF16E88B7500CBDB28 /* kfm.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B78A8ED16E88ACC00CBDB28 /* kfm.icns */; };
 		5B78AA6916EA94A600CBDB28 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AA6716EA94A600CBDB28 /* utils.cpp */; };
 		5B78ABBA16EAA96C00CBDB28 /* libGhost32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B78AB7B16EAA96B00CBDB28 /* libGhost32.a */; };
 		5B78ABBF16EAA96C00CBDB28 /* ofxDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AB8816EAA96B00CBDB28 /* ofxDisplay.cpp */; };
@@ -79,7 +79,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				5B78A8EF16E88B7500CBDB28 /* radome.icns in CopyFiles */,
+				5B78A8EF16E88B7500CBDB28 /* kfm.icns in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1052,7 +1052,7 @@
 		5B71EAAC1714D90700C26FD8 /* ofxOscReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscReceiver.h; sourceTree = "<group>"; };
 		5B71EAAD1714D90700C26FD8 /* ofxOscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscSender.cpp; sourceTree = "<group>"; };
 		5B71EAAE1714D90700C26FD8 /* ofxOscSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
-		5B78A8ED16E88ACC00CBDB28 /* radome.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = radome.icns; path = resources/macos/radome.icns; sourceTree = "<group>"; };
+		5B78A8ED16E88ACC00CBDB28 /* kfm.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = kfm.icns; path = resources/macos/kfm.icns; sourceTree = "<group>"; };
 		5B78AA6716EA94A600CBDB28 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
 		5B78AA6816EA94A600CBDB28 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		5B78AB4016EAA96B00CBDB28 /* GHOST_DisplayManagerCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOST_DisplayManagerCocoa.h; sourceTree = "<group>"; };
@@ -3128,7 +3128,7 @@
 			children = (
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
-				5B78A8ED16E88ACC00CBDB28 /* radome.icns */,
+				5B78A8ED16E88ACC00CBDB28 /* kfm.icns */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				5BF5F24216D1A68E0026DF72 /* data */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
@@ -3460,7 +3460,7 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6 = "\"$(SRCROOT)/../../../addons/ofxFenster/libs/ghost/lib/win_cb\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7 = "\"$(SRCROOT)/../../../addons/ofxFenster/libs/ghost/lib/win_vs\"";
 				PREBINDING = NO;
-				PRODUCT_NAME = "triplehead-baseDebug";
+				PRODUCT_NAME = "Kung Fu Montañez Debug";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3566,7 +3566,7 @@
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_6 = "\"$(SRCROOT)/../../../addons/ofxFenster/libs/ghost/lib/win_cb\"";
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_7 = "\"$(SRCROOT)/../../../addons/ofxFenster/libs/ghost/lib/win_vs\"";
 				PREBINDING = NO;
-				PRODUCT_NAME = "triplehead-base";
+				PRODUCT_NAME = "Kung Fu Montañez";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

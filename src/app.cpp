@@ -6,11 +6,9 @@
 
 #define SIDEBAR_WIDTH 300
 
-#define FBO_WIDTH 800
-#define FBO_HEIGHT 600
-
+#define NUM_SCREENS 12
 #define FRAME_RATE_MAX 90
-#define FRAME_DELAY_MAX 30
+#define FRAME_DELAY_MAX 24
 #define FRAME_LOOP_MAX 30
 #define FRAME_ADVANCE_MAX 10
 #define STR(x) #x
@@ -38,11 +36,11 @@ thbApp::~thbApp() {
 
 void thbApp::initBuffer() {
     ofPushStyle();
-    _nFrameBufferSize = FRAME_DELAY_MAX*2 + FRAME_LOOP_MAX + FRAME_ADVANCE_MAX;
-    //_nFrameBufferSize = 90;
+    _nFrameBufferSize = FRAME_DELAY_MAX*(NUM_SCREENS-1) + FRAME_LOOP_MAX + FRAME_ADVANCE_MAX;
+    _buffer.clear();
     for(int ii=0; ii<_nFrameBufferSize; ii++) {
         ofFbo fbo;
-        fbo.allocate(FBO_WIDTH, FBO_HEIGHT, GL_RGB);
+        fbo.allocate(_player.width, _player.height, GL_RGB);
         fbo.begin();
         ofClear(0,0,0);
         fbo.end();
@@ -65,7 +63,7 @@ void thbApp::blankBuffer() {
 
 void thbApp::setup() {
     
-    ofxFensterManager::get()->setWindowTitle("kung fu montanez");
+    ofxFensterManager::get()->setWindowTitle("Kung Fu Montanez");
     
     ofSetFrameRate(45);
     ofEnableSmoothing();
@@ -80,8 +78,10 @@ void thbApp::setup() {
     
     _nFrameCushion = 0;
     
-    initBuffer();
-    
+    _fHeightPercent = 1.0;
+    _fHeightOffset = 0.0;
+    _nMargin = 0;
+        
     loadFile();
         
     initGUI();
@@ -93,23 +93,8 @@ void thbApp::initGUI() {
     _pUI->setDrawBack(false);
     
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    _pUI->addWidgetDown(new ofxUILabel("kung fu montanez   @dewb", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("Kung Fu Montanez by @dewb", OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
-    
-    /*
-    _radioANames.push_back("Option 1");
-    _radioANames.push_back("Option 2");
-    _radioANames.push_back("Option 3");
-    _radioANames.push_back("Option 4");
-    addRadioAndSetFirstItem(_pUI, "RADIO A", _radioANames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
-    _pUI->addSpacer(0, 12);
-
-    _radioBNames.push_back("Option 1");
-    _radioBNames.push_back("Option 2");
-    _radioBNames.push_back("Option 3");
-    addRadioAndSetFirstItem(_pUI, "RADIO B", _radioBNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
-    _pUI->addSpacer(0, 12);
-    */
      
     _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
@@ -138,6 +123,19 @@ void thbApp::initGUI() {
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, _nFrameAdvance/(FRAME_ADVANCE_MAX*1.0),
                                                "ADVANCE", "0", FRAME_ADVANCE_MAX_STR, OFX_UI_FONT_LARGE));
 
+    _pUI->addSpacer(0, 20);
+
+    _pUI->addWidgetDown(new ofxUILabel("HEIGHT", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, 1.0,
+                                               "HEIGHT", "0%", "100%", OFX_UI_FONT_LARGE));
+    
+    _pUI->addWidgetDown(new ofxUILabel("V OFFSET", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, -1.0, 1.0, 0.0,
+                                               "V OFFSET", "-1", "1", OFX_UI_FONT_LARGE));
+
+    _pUI->addWidgetDown(new ofxUILabel("MARGIN", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 20.0, 0.0,
+                                               "MARGIN", "0", "20", OFX_UI_FONT_LARGE));    
     
     ofBackground(255, 20, 32);
 
@@ -173,7 +171,8 @@ void thbApp::showProjectorWindow() {
 void thbApp::initNewMovie(string file) {
     _player.loadMovie(file);
     
-    blankBuffer();
+    initBuffer();
+    
     _nCurrentFrame = 0;
     _nCurrentLoopStart = 0;
     _bufferCaret = 0;
@@ -196,7 +195,7 @@ void thbApp::bufferMovieFrames(int requestedFrames) {
         _player.update();
         _bufferCaret = (_bufferCaret+1) % _nFrameBufferSize;
         _buffer[_bufferCaret].begin();
-        _player.draw(0, 0, FBO_WIDTH, FBO_HEIGHT);
+        _player.draw(0, 0, _player.width, _player.height);
         _buffer[_bufferCaret].end();
     }
     ofPopStyle();
@@ -210,7 +209,7 @@ void thbApp::jumpFrames(int n) {
     _nCurrentFrame = 0;
     _nCurrentLoopStart = 0;
     _bufferCaret = 0;
-    bufferMovieFrames(_nFrameLoop+2*_nFrameDelay);
+    bufferMovieFrames(_nFrameLoop + _nFrameDelay * (NUM_SCREENS - 1));
 }
 
 void thbApp::update() {
@@ -251,15 +250,16 @@ void thbApp::drawProjectorOutput(int w, int h) {
     
     int i = 0;
     int N = _nFrameBufferSize;
-    
-    auto left = _buffer[_nCurrentFrame];
-    auto mid = _buffer[(_nCurrentFrame + _nFrameDelay) % N];
-    auto right = _buffer[(_nCurrentFrame + 2 * _nFrameDelay) % N];
+    int s = NUM_SCREENS;
     
     ofPushStyle();
-    left.draw(0, 0, w/3, h);
-    mid.draw(w/3, 0, w/3, h);
-    right.draw(2*w/3, 0, w/3, h);
+    for (int i = 0; i < s; i++) {
+        auto frame = _buffer[(_nCurrentFrame + i * _nFrameDelay) % N];
+        frame.draw(i / (s * 1.0) * w,
+                   h * ((1.0 - _fHeightPercent) * 0.5 + _fHeightOffset),
+                   (w - _nMargin * (s - 1)) / (s * 1.0),
+                   h * _fHeightPercent);
+    }    
     ofPopStyle();
 }
 
@@ -350,6 +350,21 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
             _nFrameAdvance = slider->getValue() * FRAME_ADVANCE_MAX;
+        }
+    } else if (name == "HEIGHT") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _fHeightPercent = slider->getScaledValue();
+        }
+    } else if (name == "V OFFSET") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _fHeightOffset = slider->getScaledValue();
+        }
+    } else if (name == "MARGIN") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _nMargin = slider->getScaledValue();
         }
     } else if (name == "Load...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);

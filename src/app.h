@@ -52,6 +52,10 @@ protected:
     
     int _nFrameCushion;
     
+    float _fHeightPercent;
+    float _fHeightOffset;
+    int _nMargin;
+    
     vector<string> _radioANames;
     vector<string> _radioBNames;
     
