@@ -116,7 +116,6 @@ void thbApp::initGUI() {
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, ofGetFrameRate()/(FRAME_RATE_MAX*1.0),
                                                "FRAME RATE", "0", FRAME_RATE_MAX_STR, OFX_UI_FONT_LARGE));
 
-    char buf[100];
     _pUI->addWidgetDown(new ofxUILabel("DELAY", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, _nFrameDelay/(FRAME_DELAY_MAX*1.0),
                                                "DELAY", "0", FRAME_DELAY_MAX_STR, OFX_UI_FONT_LARGE));
