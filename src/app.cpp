@@ -109,6 +109,8 @@ void thbApp::initGUI() {
     _pUI->addWidgetDown(new ofxUILabel("SOURCE VIDEO", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabelButton("Load...", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabelButton("<<", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetRight(new ofxUILabelButton("<", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetRight(new ofxUILabelButton(">", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addWidgetRight(new ofxUILabelButton(">>", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
 
@@ -139,8 +141,8 @@ void thbApp::initGUI() {
                                                "V OFFSET", "-1", "1", OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("MARGIN", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 20.0, 0.0,
-                                               "MARGIN", "0", "20", OFX_UI_FONT_LARGE));    
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 40.0, 0.0,
+                                               "MARGIN", "0", "40", OFX_UI_FONT_LARGE));    
     
     ofBackground(255, 20, 32);
 
@@ -181,7 +183,7 @@ void thbApp::initNewMovie(string file) {
     _nCurrentFrame = 0;
     _nCurrentLoopStart = 0;
     _bufferCaret = 0;
-    bufferMovieFrames(_nFrameLoop+2*_nFrameDelay);
+    bufferMovieFrames(_nFrameLoop + _nFrameDelay * (NUM_SCREENS - 1));
 }
 
 void thbApp::bufferMovieFrames(int requestedFrames) {
@@ -253,7 +255,7 @@ void thbApp::drawProjectorOutput(int w, int h) {
     if (_buffer.size() == 0)
         return;
 
-    ofClear(0,0,0);
+    ofClear(0,0,0,0);
     
     int i = 0;
     int N = _nFrameBufferSize;
@@ -382,6 +384,18 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
         if (pButton && !pButton->getValue())
         {
             loadFile();
+        }
+    } else if (name == "<") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton && !pButton->getValue())
+        {
+            jumpFrames(-150); // assume roughly 30fps source
+        }
+    } else if (name == ">") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton && !pButton->getValue())
+        {
+            jumpFrames(150); // assume roughly 30fps source
         }
     } else if (name == "<<") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
