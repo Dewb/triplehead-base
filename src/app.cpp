@@ -6,7 +6,7 @@
 
 #define SIDEBAR_WIDTH 300
 
-#define NUM_SCREENS 12
+#define NUM_SCREENS 6
 #define FRAME_RATE_MAX 90
 #define FRAME_DELAY_MAX 24
 #define FRAME_LOOP_MAX 30
@@ -98,7 +98,7 @@ void thbApp::initGUI() {
     _pUI->setWidgetSpacing(5.0);
     _pUI->setDrawBack(false);
     
-    _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    //_pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
     _pUI->addWidgetDown(new ofxUILabel("Kung Fu Montanez - @dewb", OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
      
