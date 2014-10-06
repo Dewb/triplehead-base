@@ -1,0 +1,6 @@
+ofxOsc
+ofxXmlSettings
+ofxFenster
+ofxHapPlayer
+ofxSyphon
+ofxUI

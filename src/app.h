@@ -2,7 +2,11 @@
 
 #include "ofMain.h"
 #include "ofxUI.h"
+
+#ifdef USE_FENSTER
 #include "ofxFenster.h"
+#endif
+
 #include "ofxOscReceiver.h"
 #include "ofxSyphonServer.h"
 #include "ofxHapPlayer.h"
@@ -38,8 +42,10 @@ protected:
     void jumpFrames(int n);
     
     ofxUICanvas* _pUI;
-    
+
+#ifdef USE_FENSTER
     ofxFenster* _projectorWindow;
+#endif
     
     bool _fullscreen;
     int _radioA;
@@ -72,6 +78,8 @@ protected:
     ofxSyphonServer _syphonServer;
 };
 
+#ifdef USE_FENSTER
+
 class projectorWindowListener : public ofxFensterListener {
 public:
     projectorWindowListener(thbApp* app);
@@ -80,3 +88,5 @@ public:
 protected:
     thbApp* _app;
 };
+
+#endif

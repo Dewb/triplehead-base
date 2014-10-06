@@ -5,46 +5,58 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>232017A5-92BB-48B5-96F8-389892B91C6F</string>
+	<string>C9B66407-D92F-4495-AC4B-796A53308D6A</string>
 	<key>IDESourceControlProjectName</key>
 	<string>kfm</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>0E104EDC-E916-4F05-B02E-13FBE29B76E0</key>
-		<string>https://github.com/rezaali/ofxUI</string>
-		<key>87DEFE12-E2E9-4339-A1B4-A2584865F70B</key>
+		<key>26B21397-EFDB-48CB-B5A7-8C89B72EBCA5</key>
 		<string>https://github.com/Dewb/triplehead-base</string>
-		<key>96DC77A4-C581-4380-B066-A1E88277101C</key>
+		<key>440C0F74-2DA9-4201-A202-4AF7DF743966</key>
+		<string>https://github.com/bangnoise/ofxHapPlayer</string>
+		<key>5C08EFFC-5657-42D0-8BA9-DF40B823FA96</key>
+		<string>https://github.com/sheridanis/ofxFenster</string>
+		<key>8CE7ADEF-CAA6-48B4-A486-BC4743012AB3</key>
+		<string>https://github.com/rezaali/ofxUI</string>
+		<key>F2C896EB-EDD8-4684-81E1-79450F96A376</key>
 		<string>https://github.com/astellato/ofxSyphon</string>
-		<key>D22CCD57-55B3-4D3C-8E03-21B9DC4D823F</key>
-		<string>https://github.com/underdoeg/ofxFenster.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>kfm.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>0E104EDC-E916-4F05-B02E-13FBE29B76E0</key>
-		<string>../../../of_v0073_osx_release/addons/ofxUI</string>
-		<key>87DEFE12-E2E9-4339-A1B4-A2584865F70B</key>
+		<key>26B21397-EFDB-48CB-B5A7-8C89B72EBCA5</key>
 		<string>../..</string>
-		<key>96DC77A4-C581-4380-B066-A1E88277101C</key>
-		<string>../../../of_v0073_osx_release/addons/ofxSyphon</string>
-		<key>D22CCD57-55B3-4D3C-8E03-21B9DC4D823F</key>
-		<string>../../../of_v0073_osx_release/addons/ofxFenster</string>
+		<key>440C0F74-2DA9-4201-A202-4AF7DF743966</key>
+		<string>../../../of_v0.8.4_osx_release/addons/ofxHapPlayer</string>
+		<key>5C08EFFC-5657-42D0-8BA9-DF40B823FA96</key>
+		<string>../../../of_v0.8.4_osx_release/addons/ofxFenster</string>
+		<key>8CE7ADEF-CAA6-48B4-A486-BC4743012AB3</key>
+		<string>../../../of_v0.8.4_osx_release/addons/ofxUI</string>
+		<key>F2C896EB-EDD8-4684-81E1-79450F96A376</key>
+		<string>../../../of_v0.8.4_osx_release/addons/ofxSyphon</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Dewb/triplehead-base</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>87DEFE12-E2E9-4339-A1B4-A2584865F70B</string>
+	<string>26B21397-EFDB-48CB-B5A7-8C89B72EBCA5</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D22CCD57-55B3-4D3C-8E03-21B9DC4D823F</string>
+			<string>26B21397-EFDB-48CB-B5A7-8C89B72EBCA5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>kfm</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5C08EFFC-5657-42D0-8BA9-DF40B823FA96</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxFenster</string>
 		</dict>
@@ -52,7 +64,15 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>96DC77A4-C581-4380-B066-A1E88277101C</string>
+			<string>440C0F74-2DA9-4201-A202-4AF7DF743966</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxHapPlayer</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F2C896EB-EDD8-4684-81E1-79450F96A376</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxSyphon</string>
 		</dict>
@@ -60,17 +80,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>0E104EDC-E916-4F05-B02E-13FBE29B76E0</string>
+			<string>8CE7ADEF-CAA6-48B4-A486-BC4743012AB3</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxUI</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>87DEFE12-E2E9-4339-A1B4-A2584865F70B</string>
-			<key>IDESourceControlWCCName</key>
-			<string>triplehead-base</string>
 		</dict>
 	</array>
 </dict>

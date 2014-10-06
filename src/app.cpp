@@ -1,6 +1,10 @@
 #include "app.h"
 #include "utils.h"
+
+#ifdef USE_FENSTER
 #include "ofxFensterManager.h"
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -22,17 +26,20 @@
 
 thbApp::thbApp() {
     _pUI = NULL;
-    _projectorWindow = NULL;
+    //_projectorWindow = NULL;
 }
 
 thbApp::~thbApp() {
     if (_pUI)
         delete (_pUI);
+ 
     
+#ifdef USE_FENSTER
     if (_projectorWindow) {
         _projectorWindow->destroy();
         ofxFensterManager::get()->deleteFenster(_projectorWindow);
     }    
+#endif
 }
 
 void thbApp::initBuffer() {
@@ -64,7 +71,9 @@ void thbApp::blankBuffer() {
 
 void thbApp::setup() {
     
+#ifdef USE_FENSTER
     ofxFensterManager::get()->setWindowTitle("Kung Fu Montanez");
+#endif
     
     ofSetFrameRate(45);
     ofEnableSmoothing();
@@ -115,19 +124,19 @@ void thbApp::initGUI() {
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("PLAYBACK SPEED", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, ofGetFrameRate()/(FRAME_RATE_MAX*1.0),
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_RATE_MAX, ofGetFrameRate(),
                                                "FRAME RATE", "0", FRAME_RATE_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("DELAY", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, _nFrameDelay/(FRAME_DELAY_MAX*1.0),
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_DELAY_MAX, _nFrameDelay,
                                                "DELAY", "0", FRAME_DELAY_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("LOOP LENGTH", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, _nFrameLoop/(FRAME_LOOP_MAX*1.0),
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_LOOP_MAX, _nFrameLoop,
                                                "LOOP", "0", FRAME_LOOP_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("ADVANCE", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, _nFrameAdvance/(FRAME_ADVANCE_MAX*1.0),
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_ADVANCE_MAX, _nFrameAdvance,
                                                "ADVANCE", "0", FRAME_ADVANCE_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addSpacer(0, 20);
@@ -156,16 +165,18 @@ void thbApp::loadFile() {
         initNewMovie(result.filePath);
     }
     
+#ifdef USE_FENSTER
     // Workaround for ofxFenster modal mouse event bug
     ofxFenster* pWin = ofxFensterManager::get()->getActiveWindow();
     ofxFenster* pDummy = ofxFensterManager::get()->createFenster(0,0,1,1);
     ofxFensterManager::get()->setActiveWindow(pDummy);
     ofxFensterManager::get()->setActiveWindow(pWin);
     ofxFensterManager::get()->deleteFenster(pDummy);
-    
+#endif
 }
 
 void thbApp::showProjectorWindow() {
+#ifdef USE_FENSTER
     if (_projectorWindow && _projectorWindow->id != 0) {
         _projectorWindow->destroy();
         ofxFensterManager::get()->deleteFenster(_projectorWindow);
@@ -173,6 +184,7 @@ void thbApp::showProjectorWindow() {
     _projectorWindow = ofxFensterManager::get()->createFenster(400, 300, 750, 200, OF_WINDOW);
     _projectorWindow->addListener(new projectorWindowListener(this));
     _projectorWindow->setWindowTitle("Projector Output");
+#endif
 }
 
 void thbApp::initNewMovie(string file) {
@@ -277,6 +289,8 @@ void thbApp::draw() {
     ofClear(180,0,80);
     _pUI->draw();
 
+    drawProjectorOutput(ofGetWidth(), ofGetHeight());
+    
 #ifdef USE_SYPHON
     _syphonFrame.begin();
     drawProjectorOutput(_syphonFrame.getWidth(), _syphonFrame.getHeight());
@@ -335,12 +349,12 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
     if (name == "FRAME RATE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            ofSetFrameRate(slider->getValue() * FRAME_RATE_MAX);
+            ofSetFrameRate(slider->getScaledValue());
         }
     } else if (name == "DELAY") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            int newDelay = slider->getValue() * FRAME_DELAY_MAX;
+            int newDelay = slider->getScaledValue();
             if (newDelay > _nFrameDelay) {
                 bufferMovieFrames(2 * (newDelay - _nFrameDelay));
             } else {
@@ -351,7 +365,7 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
     } else if (name == "LOOP") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            int newLoop = slider->getValue() * FRAME_LOOP_MAX;
+            int newLoop = slider->getScaledValue();
             if (newLoop > _nFrameLoop) {
                 bufferMovieFrames(newLoop - _nFrameLoop);
             } else {
@@ -362,7 +376,7 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
     } else if (name == "ADVANCE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _nFrameAdvance = slider->getValue() * FRAME_ADVANCE_MAX;
+            _nFrameAdvance = slider->getScaledValue();
         }
     } else if (name == "HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
@@ -418,6 +432,8 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
     }
 }
 
+#ifdef USE_FENSTER
+
 projectorWindowListener::projectorWindowListener(thbApp* app) {
     _app = app;
 }
@@ -432,3 +448,5 @@ void projectorWindowListener::draw() {
         _app->drawProjectorOutput(w, h);
     }
 }
+
+#endif

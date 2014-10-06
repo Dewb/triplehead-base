@@ -1,7 +1,11 @@
 #include "app.h"
+
+#ifdef USE_FENSTER
 #include "ofxFensterManager.h"
+#endif
 
 int main() {
-    ofSetupOpenGL(ofxFensterManager::get(), 330, 800, OF_WINDOW);
-    ofRunFensterApp(new thbApp());
+    
+    ofSetupOpenGL(1330, 800, OF_WINDOW);
+    ofRunApp(new thbApp());
 }
