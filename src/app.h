@@ -5,6 +5,8 @@
 #include "ofxFenster.h"
 #include "ofxOscReceiver.h"
 #include "ofxSyphonServer.h"
+#include "ofxHapPlayer.h"
+
 
 class thbApp : public ofBaseApp {
 public:

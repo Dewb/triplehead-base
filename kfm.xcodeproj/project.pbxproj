@@ -22,6 +22,8 @@
 		5B78ABD216EAAB9F00CBDB28 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78ABD116EAAB9F00CBDB28 /* main.cpp */; };
 		5BCF5E4B19DF1F2F0030AB09 /* app.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF5E4819DF1F2F0030AB09 /* app.cpp */; };
 		5BCF5E4C19DF1F2F0030AB09 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF5E4A19DF1F2F0030AB09 /* utils.cpp */; };
+		5BCF5E7119DFF22A0030AB09 /* HapSupport.c in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF5E6819DFF22A0030AB09 /* HapSupport.c */; };
+		5BCF5E7219DFF22A0030AB09 /* ofxHapPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF5E6D19DFF22A0030AB09 /* ofxHapPlayer.cpp */; };
 		5BF5F24516D1A68E0026DF72 /* radome.frag in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F24316D1A68E0026DF72 /* radome.frag */; };
 		5BF5F24616D1A68E0026DF72 /* radome.vert in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F24416D1A68E0026DF72 /* radome.vert */; };
 		5BFD4E3D19CF922700F42053 /* libGhost32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFD4A3E19CF922200F42053 /* libGhost32.a */; };
@@ -132,6 +134,10 @@
 		5BCF5E4919DF1F2F0030AB09 /* app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = app.h; sourceTree = "<group>"; };
 		5BCF5E4A19DF1F2F0030AB09 /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
 		5BCF5E4D19DF1F350030AB09 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		5BCF5E6819DFF22A0030AB09 /* HapSupport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HapSupport.c; sourceTree = "<group>"; };
+		5BCF5E6919DFF22A0030AB09 /* HapSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HapSupport.h; sourceTree = "<group>"; };
+		5BCF5E6D19DFF22A0030AB09 /* ofxHapPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxHapPlayer.cpp; sourceTree = "<group>"; };
+		5BCF5E6E19DFF22A0030AB09 /* ofxHapPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxHapPlayer.h; sourceTree = "<group>"; };
 		5BF5F24316D1A68E0026DF72 /* radome.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.frag; sourceTree = "<group>"; };
 		5BF5F24416D1A68E0026DF72 /* radome.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.vert; sourceTree = "<group>"; };
 		5BFD49FF19CF922200F42053 /* GHOST_DisplayManagerCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHOST_DisplayManagerCocoa.h; sourceTree = "<group>"; };
@@ -414,6 +420,50 @@
 			path = osc;
 			sourceTree = "<group>";
 		};
+		5BCF5E4E19DFF2290030AB09 /* ofxHapPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				5BCF5E6519DFF22A0030AB09 /* libs */,
+				5BCF5E6C19DFF22A0030AB09 /* src */,
+			);
+			name = ofxHapPlayer;
+			path = ../../of_v0.7.4_osx_release/addons/ofxHapPlayer;
+			sourceTree = "<group>";
+		};
+		5BCF5E6519DFF22A0030AB09 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				5BCF5E6619DFF22A0030AB09 /* HapSupport */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		5BCF5E6619DFF22A0030AB09 /* HapSupport */ = {
+			isa = PBXGroup;
+			children = (
+				5BCF5E6719DFF22A0030AB09 /* src */,
+			);
+			path = HapSupport;
+			sourceTree = "<group>";
+		};
+		5BCF5E6719DFF22A0030AB09 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5BCF5E6819DFF22A0030AB09 /* HapSupport.c */,
+				5BCF5E6919DFF22A0030AB09 /* HapSupport.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		5BCF5E6C19DFF22A0030AB09 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5BCF5E6D19DFF22A0030AB09 /* ofxHapPlayer.cpp */,
+				5BCF5E6E19DFF22A0030AB09 /* ofxHapPlayer.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		5BF5F24216D1A68E0026DF72 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +477,7 @@
 		5BFD48BB19CF922100F42053 /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				5BCF5E4E19DFF2290030AB09 /* ofxHapPlayer */,
 				5B4D492B19D0F18100A9FC01 /* ofxOsc */,
 				5BFD492719CF922100F42053 /* ofxFenster */,
 				5BFD4B1519CF922200F42053 /* ofxSyphon */,
@@ -972,6 +1023,7 @@
 				5BFD4E6A19CF922700F42053 /* ofxSyphonClient.mm in Sources */,
 				5BF5F24516D1A68E0026DF72 /* radome.frag in Sources */,
 				5BF5F24616D1A68E0026DF72 /* radome.vert in Sources */,
+				5BCF5E7219DFF22A0030AB09 /* ofxHapPlayer.cpp in Sources */,
 				5B4D495719D0F18100A9FC01 /* ofxOscSender.cpp in Sources */,
 				5B4D495519D0F18100A9FC01 /* ofxOscMessage.cpp in Sources */,
 				5BFD4E6C19CF922700F42053 /* ofxSyphonServerDirectory.mm in Sources */,
@@ -983,6 +1035,7 @@
 				5B4D495B19D0F18100A9FC01 /* OscOutboundPacketStream.cpp in Sources */,
 				5B4D495619D0F18100A9FC01 /* ofxOscReceiver.cpp in Sources */,
 				5BFD4E4419CF922700F42053 /* ofxFensterCanvas.cpp in Sources */,
+				5BCF5E7119DFF22A0030AB09 /* HapSupport.c in Sources */,
 				5BCF5E4B19DF1F2F0030AB09 /* app.cpp in Sources */,
 				5BFD4ECD19CF922700F42053 /* tinyxmlerror.cpp in Sources */,
 				5B4D495C19D0F18100A9FC01 /* OscPrintReceivedElements.cpp in Sources */,

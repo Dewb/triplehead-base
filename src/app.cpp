@@ -41,7 +41,7 @@ void thbApp::initBuffer() {
     _buffer.clear();
     for(int ii=0; ii<_nFrameBufferSize; ii++) {
         ofFbo fbo;
-        fbo.allocate(_player.width, _player.height, GL_RGB);
+        fbo.allocate(_player.getWidth(), _player.getHeight(), GL_RGB);
         fbo.begin();
         ofClear(0,0,0);
         fbo.end();
@@ -202,7 +202,7 @@ void thbApp::bufferMovieFrames(int requestedFrames) {
         _player.update();
         _bufferCaret = (_bufferCaret+1) % _nFrameBufferSize;
         _buffer[_bufferCaret].begin();
-        _player.draw(0, 0, _player.width, _player.height);
+        _player.draw(0, 0, _player.getWidth(), _player.getHeight());
         _buffer[_bufferCaret].end();
     }
     ofPopStyle();
