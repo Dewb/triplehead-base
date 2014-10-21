@@ -14,7 +14,7 @@
 #define FRAME_RATE_MAX 90
 #define FRAME_DELAY_MAX 24
 #define FRAME_LOOP_MAX 30
-#define FRAME_ADVANCE_MAX 10
+#define FRAME_ADVANCE_MAX 5
 #define STR(x) #x
 #define STRINGIFY(x) STR(x)
 #define FRAME_RATE_MAX_STR STRINGIFY(FRAME_RATE_MAX)
@@ -89,7 +89,9 @@ void thbApp::setup() {
     
     _nFrameDelay = 7;
     _nFrameLoop = 10;
-    _nFrameAdvance = 3;
+    _fFrameAdvance = 3.0;
+    
+    _fFractionalAdvance = 0.0;
     
     _nFrameCushion = 0;
     
@@ -136,7 +138,7 @@ void thbApp::initGUI() {
                                                "LOOP", "0", FRAME_LOOP_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("ADVANCE", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_ADVANCE_MAX, _nFrameAdvance,
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_ADVANCE_MAX, _fFrameAdvance,
                                                "ADVANCE", "0", FRAME_ADVANCE_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addSpacer(0, 20);
@@ -234,10 +236,15 @@ void thbApp::jumpFrames(int n) {
 void thbApp::update() {
     
     //printf("s: %d e: %d - %d\n", _nCurrentLoopStart, _nCurrentLoopStart + _nFrameLoop, _nCurrentFrame);
-    if (_nCurrentFrame == (_nCurrentLoopStart + _nFrameLoop - 1) % _nFrameBufferSize) {
-        _nCurrentLoopStart = (_nCurrentLoopStart + _nFrameAdvance) % _nFrameBufferSize;
+    if (_nCurrentFrame >= (_nCurrentLoopStart + _nFrameLoop - 1) % _nFrameBufferSize) {
+    
+        _fFractionalAdvance += _fFrameAdvance * (_nFrameLoop / 30.0);
+        int advance = floor(_fFractionalAdvance);
+        _fFractionalAdvance -= advance;
+        
+        _nCurrentLoopStart = (_nCurrentLoopStart + advance) % _nFrameBufferSize;
         _nCurrentFrame = _nCurrentLoopStart;
-        bufferMovieFrames(_nFrameAdvance);
+        bufferMovieFrames(advance);
     } else {
         _nCurrentFrame = (_nCurrentFrame+1) % _nFrameBufferSize;
     }
@@ -256,8 +263,8 @@ void thbApp::update() {
                 _nFrameLoop = msg.getArgAsInt32(0);
                 updateSlider(_pUI, "LOOP", 0, FRAME_LOOP_MAX, _nFrameLoop);
             } else if (addr == "/montanez/advance") {
-                _nFrameAdvance = msg.getArgAsInt32(0);
-                updateSlider(_pUI, "ADVANCE", 0, FRAME_ADVANCE_MAX, _nFrameAdvance);
+                _fFrameAdvance = msg.getArgAsFloat(0);
+                updateSlider(_pUI, "ADVANCE", 0, FRAME_ADVANCE_MAX, _fFrameAdvance);
             }
         }
     }
@@ -376,7 +383,7 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
     } else if (name == "ADVANCE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _nFrameAdvance = slider->getScaledValue();
+            _fFrameAdvance = slider->getScaledValue();
         }
     } else if (name == "HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);

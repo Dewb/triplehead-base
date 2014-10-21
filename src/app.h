@@ -54,7 +54,9 @@ protected:
     int _nFrameBufferSize;
     int _nFrameDelay;
     int _nFrameLoop;
-    int _nFrameAdvance;
+    float _fFrameAdvance;
+    
+    float _fFractionalAdvance;
     
     int _nCurrentFrame;
     int _nCurrentLoopStart;
