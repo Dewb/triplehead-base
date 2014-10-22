@@ -1,6 +1,6 @@
 #pragma once
 
-#define NUM_SCREENS 6
+#define NUM_SCREENS 8
 #define USE_SYPHON
 
 #include "ofMain.h"
