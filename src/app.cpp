@@ -10,7 +10,6 @@
 
 #define SIDEBAR_WIDTH 300
 
-#define NUM_SCREENS 6
 #define FRAME_RATE_MAX 90
 #define FRAME_DELAY_MAX 24
 #define FRAME_LOOP_MAX 30
@@ -22,7 +21,6 @@
 #define FRAME_LOOP_MAX_STR STRINGIFY(FRAME_LOOP_MAX)
 #define FRAME_ADVANCE_MAX_STR STRINGIFY(FRAME_ADVANCE_MAX)
 
-#define USE_SYPHON
 
 thbApp::thbApp() {
     _pUI = NULL;
@@ -82,9 +80,19 @@ void thbApp::setup() {
     
     _osc.setup(30274);
     
+    _drawPreview = true;
+    
 #ifdef USE_SYPHON
-    _syphonFrame.allocate(3840, 800, GL_RGB);
-    _syphonServer.setName("kfm");
+    //_syphonFrame.allocate(3840, 800, GL_RGB);
+    //_syphonServer.setName("kfm");
+
+    for (int i = 0; i < NUM_SCREENS; i++) {
+        std::ostringstream name;
+        name << "Screen " << i;
+        _syphonScreens[i].setName(name.str());
+    }
+    _drawSyphonMultiple = true;
+    _drawSyphonSingle = false;
 #endif
     
     _nFrameDelay = 7;
@@ -109,8 +117,8 @@ void thbApp::initGUI() {
     _pUI->setWidgetSpacing(5.0);
     _pUI->setDrawBack(false);
     
-    //_pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    _pUI->addWidgetDown(new ofxUILabel("Kung Fu Montanez - @dewb", OFX_UI_FONT_LARGE));
+    _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    //_pUI->addWidgetDown(new ofxUILabel("Kung Fu Montanez - @dewb", OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
      
     _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_LARGE));
@@ -141,7 +149,7 @@ void thbApp::initGUI() {
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_ADVANCE_MAX, _fFrameAdvance,
                                                "ADVANCE", "0", FRAME_ADVANCE_MAX_STR, OFX_UI_FONT_LARGE));
 
-    _pUI->addSpacer(0, 20);
+    _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("HEIGHT", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 1.0, 1.0,
@@ -153,7 +161,17 @@ void thbApp::initGUI() {
 
     _pUI->addWidgetDown(new ofxUILabel("MARGIN", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 40.0, 0.0,
-                                               "MARGIN", "0", "40", OFX_UI_FONT_LARGE));    
+                                               "MARGIN", "0", "40", OFX_UI_FONT_LARGE));
+    
+    
+    _pUI->addSpacer(0, 12);
+
+    _pUI->addWidgetDown(new ofxUILabel("OUTPUTS", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIToggle("PREVIEW", &_drawPreview, 30, 30));
+#ifdef USE_SYPHON
+    //_pUI->addWidgetRight(new ofxUIToggle("SYPHON-1", &_drawSyphonSingle, 30, 30));
+    _pUI->addWidgetRight(new ofxUIToggle("SYPHON-N", &_drawSyphonMultiple, 30, 30));
+#endif
     
     ofBackground(255, 20, 32);
 
@@ -270,24 +288,26 @@ void thbApp::update() {
     }
 }
 
+ofFbo& thbApp::getSingleScreen(int screen) {
+    return _buffer[(_nCurrentFrame + screen * _nFrameDelay) % _nFrameBufferSize];
+}
+
 void thbApp::drawProjectorOutput(int w, int h) {
     if (_buffer.size() == 0)
         return;
 
     ofClear(0,0,0,0);
     
-    int i = 0;
-    int N = _nFrameBufferSize;
     int s = NUM_SCREENS;
     
     ofPushStyle();
     for (int i = 0; i < s; i++) {
-        auto frame = _buffer[(_nCurrentFrame + i * _nFrameDelay) % N];
+        auto& frame = getSingleScreen(i);
         frame.draw(i / (s * 1.0) * w,
                    h * ((1.0 - _fHeightPercent) * 0.5 + _fHeightOffset),
                    (w - _nMargin * (s - 1)) / (s * 1.0),
                    h * _fHeightPercent);
-    }    
+    }
     ofPopStyle();
 }
 
@@ -296,14 +316,26 @@ void thbApp::draw() {
     ofClear(180,0,80);
     _pUI->draw();
 
-    drawProjectorOutput(ofGetWidth(), ofGetHeight());
+    if (_drawPreview) {
+        drawProjectorOutput(ofGetWidth(), ofGetHeight());
+    }
     
 #ifdef USE_SYPHON
-    _syphonFrame.begin();
-    drawProjectorOutput(_syphonFrame.getWidth(), _syphonFrame.getHeight());
-    _syphonFrame.end();
-    _syphonServer.publishTexture(&(_syphonFrame.getTextureReference()));
+    if (_drawSyphonSingle) {
+        _syphonFrame.begin();
+        drawProjectorOutput(_syphonFrame.getWidth(), _syphonFrame.getHeight());
+        _syphonFrame.end();
+        _syphonServer.publishTexture(&(_syphonFrame.getTextureReference()));
+    }
+    if (_drawSyphonMultiple) {
+        for (int i = 0; i < NUM_SCREENS; i++) {
+            std::ostringstream name;
+            name << "kfm " << i;
+            _syphonScreens[i].publishTexture(&(getSingleScreen(i).getTextureReference()));
+        }
+    }
 #endif
+
 }
 
 void thbApp::keyPressed(int key) {

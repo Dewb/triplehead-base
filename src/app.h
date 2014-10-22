@@ -1,5 +1,8 @@
 #pragma once
 
+#define NUM_SCREENS 6
+#define USE_SYPHON
+
 #include "ofMain.h"
 #include "ofxUI.h"
 
@@ -8,9 +11,11 @@
 #endif
 
 #include "ofxOscReceiver.h"
-#include "ofxSyphonServer.h"
 #include "ofxHapPlayer.h"
 
+#ifdef USE_SYPHON
+#include "ofxSyphonServer.h"
+#endif
 
 class thbApp : public ofBaseApp {
 public:
@@ -20,6 +25,8 @@ public:
     void setup();
     void update();
     void draw();
+    
+    ofFbo& getSingleScreen(int screen);
     void drawProjectorOutput(int w, int h);
     
     void showProjectorWindow();
@@ -75,9 +82,20 @@ protected:
     ofVideoPlayer _player;
     
     ofxOscReceiver _osc;
+
+    bool _drawPreview;
+    
+#ifdef USE_SYPHON
+    bool _drawSyphonSingle;
+    bool _drawSyphonMultiple;
     
     ofFbo _syphonFrame;
     ofxSyphonServer _syphonServer;
+    ofxSyphonServer _syphonScreens[NUM_SCREENS];
+#endif
+    
+    
+    
 };
 
 #ifdef USE_FENSTER
