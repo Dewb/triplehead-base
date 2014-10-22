@@ -215,7 +215,7 @@ void thbApp::initNewMovie(string file) {
     _nCurrentFrame = 0;
     _nCurrentLoopStart = 0;
     _bufferCaret = 0;
-    bufferMovieFrames(_nFrameLoop + _nFrameDelay * (NUM_SCREENS - 1));
+    bufferMovieFrames(FRAME_LOOP_MAX + FRAME_DELAY_MAX * (NUM_SCREENS - 1));
 }
 
 void thbApp::bufferMovieFrames(int requestedFrames) {
@@ -248,7 +248,7 @@ void thbApp::jumpFrames(int n) {
     _nCurrentFrame = 0;
     _nCurrentLoopStart = 0;
     _bufferCaret = 0;
-    bufferMovieFrames(_nFrameLoop + _nFrameDelay * (NUM_SCREENS - 1));
+    bufferMovieFrames(FRAME_LOOP_MAX + FRAME_DELAY_MAX * (NUM_SCREENS - 1));
 }
 
 void thbApp::update() {
@@ -259,6 +259,7 @@ void thbApp::update() {
         _fFractionalAdvance += _fFrameAdvance * (_nFrameLoop / 30.0);
         int advance = floor(_fFractionalAdvance);
         _fFractionalAdvance -= advance;
+        //printf("a: %d", advance);
         
         _nCurrentLoopStart = (_nCurrentLoopStart + advance) % _nFrameBufferSize;
         _nCurrentFrame = _nCurrentLoopStart;
@@ -289,7 +290,9 @@ void thbApp::update() {
 }
 
 ofFbo& thbApp::getSingleScreen(int screen) {
-    return _buffer[(_nCurrentFrame + screen * _nFrameDelay) % _nFrameBufferSize];
+    int index = (_nCurrentFrame + screen * _nFrameDelay) % _nFrameBufferSize;
+    if (index < 0) index = 0;
+    return _buffer[index];
 }
 
 void thbApp::drawProjectorOutput(int w, int h) {
