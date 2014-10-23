@@ -21,6 +21,9 @@
 #define FRAME_LOOP_MAX_STR STRINGIFY(FRAME_LOOP_MAX)
 #define FRAME_ADVANCE_MAX_STR STRINGIFY(FRAME_ADVANCE_MAX)
 
+#define FRAME_BUFFER_SIZE (FRAME_DELAY_MAX*(NUM_SCREENS-1) + FRAME_LOOP_MAX + FRAME_ADVANCE_MAX)
+
+
 
 thbApp::thbApp() {
     _pUI = NULL;
@@ -40,11 +43,10 @@ thbApp::~thbApp() {
 #endif
 }
 
-void thbApp::initBuffer() {
+void kfmPlayer::initBuffer() {
     ofPushStyle();
-    _nFrameBufferSize = FRAME_DELAY_MAX*(NUM_SCREENS-1) + FRAME_LOOP_MAX + FRAME_ADVANCE_MAX;
     _buffer.clear();
-    for(int ii=0; ii<_nFrameBufferSize; ii++) {
+    for(int ii = 0; ii < FRAME_BUFFER_SIZE; ii++) {
         ofFbo fbo;
         fbo.allocate(_player.getWidth(), _player.getHeight(), GL_RGB);
         fbo.begin();
@@ -56,9 +58,9 @@ void thbApp::initBuffer() {
     _bufferCaret = 0;
 }
 
-void thbApp::blankBuffer() {
+void kfmPlayer::blankBuffer() {
     ofPushStyle();
-    for(int ii=0; ii<_nFrameBufferSize; ii++) {
+    for(int ii = 0; ii < FRAME_BUFFER_SIZE; ii++) {
         _buffer[ii].begin();
         ofClear(0,0,0);
         _buffer[ii].end();
@@ -66,8 +68,42 @@ void thbApp::blankBuffer() {
     ofPopStyle();
 }
 
+void kfmPlayer::init(string name) {
+    
+    _nFrameDelay = 7;
+    _nFrameLoop = 10;
+    _fFrameAdvance = 3.0;
+    
+    _fFractionalAdvance = 0.0;
+    
+    _nFrameCushion = 0;
+    _movieLoaded = false;
+    
+#ifdef USE_SYPHON
+    for (int i = 0; i < NUM_SCREENS; i++) {
+        std::ostringstream serverName;
+        serverName << "P" << name << " S" << (i + 1);
+        _syphonScreens[i].setName(serverName.str());
+    }
+#endif
+}
+
+void kfmPlayer::publishScreens() {
+    if (!_movieLoaded) {
+        return;
+    }
+    for (int i = 0; i < NUM_SCREENS; i++) {
+        _syphonScreens[i].publishTexture(&(getSingleScreen(i).getTextureReference()));
+    }
+}
 
 void thbApp::setup() {
+    
+    for (int i = 0; i < NUM_PLAYERS; i++) {
+        std::ostringstream name;
+        name << (i + 1);
+        players[i].init(name.str());
+    }
     
 #ifdef USE_FENSTER
     ofxFensterManager::get()->setWindowTitle("Kung Fu Montanez");
@@ -86,28 +122,15 @@ void thbApp::setup() {
     //_syphonFrame.allocate(3840, 800, GL_RGB);
     //_syphonServer.setName("kfm");
 
-    for (int i = 0; i < NUM_SCREENS; i++) {
-        std::ostringstream name;
-        name << "Screen " << i;
-        _syphonScreens[i].setName(name.str());
-    }
     _drawSyphonMultiple = true;
     _drawSyphonSingle = false;
 #endif
-    
-    _nFrameDelay = 7;
-    _nFrameLoop = 10;
-    _fFrameAdvance = 3.0;
-    
-    _fFractionalAdvance = 0.0;
-    
-    _nFrameCushion = 0;
     
     _fHeightPercent = 1.0;
     _fHeightOffset = 0.0;
     _nMargin = 0;
         
-    loadFile();
+    loadFile(0);
         
     initGUI();
 }
@@ -126,7 +149,9 @@ void thbApp::initGUI() {
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("SOURCE VIDEO", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUILabelButton("Load...", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabelButton("Load 1...", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetRight(new ofxUILabelButton("Load 2...", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetRight(new ofxUILabelButton("Load 3...", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabelButton("<<", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addWidgetRight(new ofxUILabelButton("<", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addWidgetRight(new ofxUILabelButton(">", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
@@ -138,15 +163,15 @@ void thbApp::initGUI() {
                                                "FRAME RATE", "0", FRAME_RATE_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("DELAY", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_DELAY_MAX, _nFrameDelay,
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_DELAY_MAX, 7,
                                                "DELAY", "0", FRAME_DELAY_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("LOOP LENGTH", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_LOOP_MAX, _nFrameLoop,
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_LOOP_MAX, 10,
                                                "LOOP", "0", FRAME_LOOP_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("ADVANCE", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_ADVANCE_MAX, _fFrameAdvance,
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_ADVANCE_MAX, 3.0,
                                                "ADVANCE", "0", FRAME_ADVANCE_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addSpacer(0, 12);
@@ -178,11 +203,11 @@ void thbApp::initGUI() {
     ofAddListener(_pUI->newGUIEvent, this, &thbApp::guiEvent);
 }
 
-void thbApp::loadFile() {
+void thbApp::loadFile(int player) {
     ofFileDialogResult result = ofSystemLoadDialog("Load File", false, "");
     
     if (result.bSuccess) {
-        initNewMovie(result.filePath);
+        players[player].initNewMovie(result.filePath);
     }
     
 #ifdef USE_FENSTER
@@ -207,7 +232,7 @@ void thbApp::showProjectorWindow() {
 #endif
 }
 
-void thbApp::initNewMovie(string file) {
+void kfmPlayer::initNewMovie(string file) {
     _player.loadMovie(file);
     
     initBuffer();
@@ -216,11 +241,13 @@ void thbApp::initNewMovie(string file) {
     _nCurrentLoopStart = 0;
     _bufferCaret = 0;
     bufferMovieFrames(FRAME_LOOP_MAX + FRAME_DELAY_MAX * (NUM_SCREENS - 1));
+    
+    _movieLoaded = true;
 }
 
-void thbApp::bufferMovieFrames(int requestedFrames) {
+void kfmPlayer::bufferMovieFrames(int requestedFrames) {
     int n = requestedFrames;
-    //printf("Loading %d frames into buffer at %d (size %d)\n", n, _bufferCaret, _nFrameBufferSize);
+    //printf("Loading %d frames into buffer at %d (size %d)\n", n, _bufferCaret, FRAME_BUFFER_SIZE);
     if (n > _nFrameCushion) {
         n -= _nFrameCushion;
         _nFrameCushion = 0;
@@ -232,7 +259,7 @@ void thbApp::bufferMovieFrames(int requestedFrames) {
     for (int ii=0; ii < n; ii++) {
         _player.nextFrame();
         _player.update();
-        _bufferCaret = (_bufferCaret+1) % _nFrameBufferSize;
+        _bufferCaret = (_bufferCaret+1) % FRAME_BUFFER_SIZE;
         _buffer[_bufferCaret].begin();
         _player.draw(0, 0, _player.getWidth(), _player.getHeight());
         _buffer[_bufferCaret].end();
@@ -240,7 +267,10 @@ void thbApp::bufferMovieFrames(int requestedFrames) {
     ofPopStyle();
 }
 
-void thbApp::jumpFrames(int n) {
+void kfmPlayer::jumpFrames(int n) {
+    if (!_movieLoaded) {
+        return;
+    }
     float pos = (_player.getCurrentFrame() + n) / (_player.getTotalNumFrames() * 1.0);
     if (pos < 0) pos = 0.0;
     if (pos > 1.0) pos = 1.0;
@@ -251,21 +281,31 @@ void thbApp::jumpFrames(int n) {
     bufferMovieFrames(FRAME_LOOP_MAX + FRAME_DELAY_MAX * (NUM_SCREENS - 1));
 }
 
-void thbApp::update() {
+void kfmPlayer::update() {
+    if (!_movieLoaded) {
+        return;
+    }
     
     //printf("s: %d e: %d - %d\n", _nCurrentLoopStart, _nCurrentLoopStart + _nFrameLoop, _nCurrentFrame);
-    if (_nCurrentFrame >= (_nCurrentLoopStart + _nFrameLoop - 1) % _nFrameBufferSize) {
+    if (_nCurrentFrame >= (_nCurrentLoopStart + _nFrameLoop - 1) % FRAME_BUFFER_SIZE) {
     
         _fFractionalAdvance += _fFrameAdvance * (_nFrameLoop / 30.0);
         int advance = floor(_fFractionalAdvance);
         _fFractionalAdvance -= advance;
         //printf("a: %d", advance);
         
-        _nCurrentLoopStart = (_nCurrentLoopStart + advance) % _nFrameBufferSize;
+        _nCurrentLoopStart = (_nCurrentLoopStart + advance) % FRAME_BUFFER_SIZE;
         _nCurrentFrame = _nCurrentLoopStart;
         bufferMovieFrames(advance);
     } else {
-        _nCurrentFrame = (_nCurrentFrame+1) % _nFrameBufferSize;
+        _nCurrentFrame = (_nCurrentFrame+1) % FRAME_BUFFER_SIZE;
+    }
+}
+
+void thbApp::update() {
+    
+    for (int i = 0; i < NUM_PLAYERS; i++) {
+        players[i].update();
     }
     
     while (_osc.hasWaitingMessages()) {
@@ -276,38 +316,52 @@ void thbApp::update() {
                 ofSetFrameRate(msg.getArgAsInt32(0));
                 updateSlider(_pUI, "FRAME RATE", 0, FRAME_RATE_MAX, ofGetFrameRate());
             } else if (addr == "/montanez/delay") {
-                _nFrameDelay = msg.getArgAsInt32(0);
-                updateSlider(_pUI, "DELAY", 0, FRAME_DELAY_MAX, _nFrameDelay);
+                int newDelay = msg.getArgAsInt32(0);
+                for (int i = 0; i < NUM_PLAYERS; i++) {
+                    players[i].setDelay(newDelay);
+                }
+                updateSlider(_pUI, "DELAY", 0, FRAME_DELAY_MAX, newDelay);
             } else if (addr == "/montanez/loop") {
-                _nFrameLoop = msg.getArgAsInt32(0);
-                updateSlider(_pUI, "LOOP", 0, FRAME_LOOP_MAX, _nFrameLoop);
+                int newDelay = msg.getArgAsInt32(0);
+                for (int i = 0; i < NUM_PLAYERS; i++) {
+                    players[i].setLoop(newDelay);
+                }
+                updateSlider(_pUI, "LOOP", 0, FRAME_LOOP_MAX, newDelay);
             } else if (addr == "/montanez/advance") {
-                _fFrameAdvance = msg.getArgAsFloat(0);
-                updateSlider(_pUI, "ADVANCE", 0, FRAME_ADVANCE_MAX, _fFrameAdvance);
+                float newAdvance = msg.getArgAsFloat(0);
+                for (int i = 0; i < NUM_PLAYERS; i++) {
+                    players[i].setAdvance(newAdvance);
+                }
+                updateSlider(_pUI, "ADVANCE", 0, FRAME_ADVANCE_MAX, newAdvance);
             }
         }
     }
 }
 
-ofFbo& thbApp::getSingleScreen(int screen) {
-    int index = (_nCurrentFrame + screen * _nFrameDelay) % _nFrameBufferSize;
+ofFbo& kfmPlayer::getSingleScreen(int screen) {
+    int index = (_nCurrentFrame + screen * _nFrameDelay) % FRAME_BUFFER_SIZE;
     if (index < 0) index = 0;
     return _buffer[index];
 }
 
-void thbApp::drawProjectorOutput(int w, int h) {
-    if (_buffer.size() == 0)
+void kfmPlayer::draw(int screen, int x, int y, int w, int h) {
+    if (!_movieLoaded) {
         return;
+    }
+    
+    auto& frame = getSingleScreen(screen);
+    frame.draw(x, y, w, h);
+}
 
-    ofClear(0,0,0,0);
+void thbApp::drawProjectorOutput(int p, int x, int y, int w, int h) {
     
     int s = NUM_SCREENS;
     
     ofPushStyle();
     for (int i = 0; i < s; i++) {
-        auto& frame = getSingleScreen(i);
-        frame.draw(i / (s * 1.0) * w,
-                   h * ((1.0 - _fHeightPercent) * 0.5 + _fHeightOffset),
+        players[p].draw(i,
+                   x + i / (s * 1.0) * w,
+                   y + h * ((1.0 - _fHeightPercent) * 0.5 + _fHeightOffset),
                    (w - _nMargin * (s - 1)) / (s * 1.0),
                    h * _fHeightPercent);
     }
@@ -316,25 +370,25 @@ void thbApp::drawProjectorOutput(int w, int h) {
 
 
 void thbApp::draw() {
-    ofClear(180,0,80);
+    ofClear(0,0,0);
     _pUI->draw();
 
     if (_drawPreview) {
-        drawProjectorOutput(ofGetWidth(), ofGetHeight());
+        drawProjectorOutput(0, 0, 0, ofGetWidth(), ofGetHeight()/3);
+        drawProjectorOutput(1, 0, ofGetHeight()/3, ofGetWidth(), ofGetHeight()/3);
+        drawProjectorOutput(2, 0, 2*ofGetHeight()/3, ofGetWidth(), ofGetHeight()/3);
     }
     
 #ifdef USE_SYPHON
     if (_drawSyphonSingle) {
         _syphonFrame.begin();
-        drawProjectorOutput(_syphonFrame.getWidth(), _syphonFrame.getHeight());
+        drawProjectorOutput(0, 0, 0, _syphonFrame.getWidth(), _syphonFrame.getHeight());
         _syphonFrame.end();
         _syphonServer.publishTexture(&(_syphonFrame.getTextureReference()));
     }
     if (_drawSyphonMultiple) {
-        for (int i = 0; i < NUM_SCREENS; i++) {
-            std::ostringstream name;
-            name << "kfm " << i;
-            _syphonScreens[i].publishTexture(&(getSingleScreen(i).getTextureReference()));
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            players[i].publishScreens();
         }
     }
 #endif
@@ -352,7 +406,7 @@ void thbApp::keyPressed(int key) {
             break;
         case 'l':
             {
-                loadFile();
+                loadFile(0);
             }
             break;
         case 'p':
@@ -380,13 +434,36 @@ void thbApp::mouseDragged(int x, int y, int button) {
 void thbApp::mouseMoved(int x, int y) {
 }
 
+void kfmPlayer::setDelay(int newDelay) {
+    if (newDelay > _nFrameDelay) {
+        bufferMovieFrames(2 * (newDelay - _nFrameDelay));
+    } else {
+        _nFrameCushion += _nFrameDelay - newDelay;
+    }
+    _nFrameDelay = newDelay;
+}
+
+void kfmPlayer::setLoop(int newLoop) {
+    if (newLoop > _nFrameLoop) {
+        bufferMovieFrames(newLoop - _nFrameLoop);
+    } else {
+        _nFrameCushion += _nFrameLoop - newLoop;
+    }
+    _nFrameLoop = newLoop;
+}
+
+void kfmPlayer::setAdvance(float newAdvance) {
+    _fFrameAdvance = newAdvance;
+}
+
+void thbApp::jumpFrames(int n) {
+    for (int i = 0; i < NUM_PLAYERS; i++) {
+        players[i].jumpFrames(n);
+    }
+}
+
 void thbApp::guiEvent(ofxUIEventArgs &e) {
     string name = e.widget->getName();
-    
-    if (matchRadioButton(name, _radioANames, &_radioA))
-        return;
-    if (matchRadioButton(name, _radioBNames, &_radioB))
-        return;
     
     if (name == "FRAME RATE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
@@ -397,28 +474,25 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
             int newDelay = slider->getScaledValue();
-            if (newDelay > _nFrameDelay) {
-                bufferMovieFrames(2 * (newDelay - _nFrameDelay));
-            } else {
-                _nFrameCushion += _nFrameDelay - newDelay;
+            for (int i = 0; i < NUM_PLAYERS; i++) {
+                players[i].setDelay(newDelay);
             }
-            _nFrameDelay = newDelay;
         }
     } else if (name == "LOOP") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
             int newLoop = slider->getScaledValue();
-            if (newLoop > _nFrameLoop) {
-                bufferMovieFrames(newLoop - _nFrameLoop);
-            } else {
-                _nFrameCushion += _nFrameLoop - newLoop;
+            for (int i = 0; i < NUM_PLAYERS; i++) {
+                players[i].setLoop(newLoop);
             }
-            _nFrameLoop = newLoop;
         }
     } else if (name == "ADVANCE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _fFrameAdvance = slider->getScaledValue();
+            float newAdvance = slider->getScaledValue();
+            for (int i = 0; i < NUM_PLAYERS; i++) {
+                players[i].setAdvance(newAdvance);
+            }
         }
     } else if (name == "HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
@@ -435,11 +509,23 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
         if (slider) {
             _nMargin = slider->getScaledValue();
         }
-    } else if (name == "Load...") {
+    } else if (name == "Load 1...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton && !pButton->getValue())
         {
-            loadFile();
+            loadFile(0);
+        }
+    } else if (name == "Load 2...") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton && !pButton->getValue())
+        {
+            loadFile(1);
+        }
+    } else if (name == "Load 3...") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton && !pButton->getValue())
+        {
+            loadFile(2);
         }
     } else if (name == "<") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
