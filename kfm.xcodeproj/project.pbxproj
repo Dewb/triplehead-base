@@ -34,6 +34,7 @@
 		5BCF5E7B19E238630030AB09 /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF5E7A19E238630030AB09 /* SyphonNameboundClient.m */; };
 		5BCF5E7D19E238890030AB09 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCF5E7C19E238890030AB09 /* Syphon.framework */; };
 		5BCF5E7E19E238E20030AB09 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5BCF5E7C19E238890030AB09 /* Syphon.framework */; };
+		5BE478F619F8AB1100C3ACCB /* kfmPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BE478F419F8AB1100C3ACCB /* kfmPlayer.cpp */; };
 		604C523A711C3AEF879FF3CD /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E039429146B4EB93A57D56 /* ofxUI2DGraph.cpp */; };
 		63104A8FA6F677625E904934 /* ofxUIImageSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509C7A2914E79C9C40B5D5E3 /* ofxUIImageSampler.cpp */; };
 		765EB1D274CA2E34FEC9E5EA /* ofxUISortableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C25CA38A4A811D0A36543A1 /* ofxUISortableList.cpp */; };
@@ -192,6 +193,8 @@
 		59928553B29E6636B8AA1F7B /* ofxUIDragableLabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIDragableLabelButton.cpp; path = ../of_v0.8.4_osx_release/addons/ofxUI/src/ofxUIDragableLabelButton.cpp; sourceTree = SOURCE_ROOT; };
 		5BCF5E7A19E238630030AB09 /* SyphonNameboundClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyphonNameboundClient.m; path = ../of_v0.8.4_osx_release/addons/ofxSyphon/libs/Syphon/src/SyphonNameboundClient.m; sourceTree = "<group>"; };
 		5BCF5E7C19E238890030AB09 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Syphon.framework; path = ../of_v0.8.4_osx_release/addons/ofxSyphon/libs/Syphon/lib/osx/Syphon.framework; sourceTree = "<group>"; };
+		5BE478F419F8AB1100C3ACCB /* kfmPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kfmPlayer.cpp; sourceTree = "<group>"; };
+		5BE478F519F8AB1100C3ACCB /* kfmPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfmPlayer.h; sourceTree = "<group>"; };
 		5F51E99B31833CED5B6D1CD0 /* ofxUISpectrum.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUISpectrum.h; path = ../of_v0.8.4_osx_release/addons/ofxUI/src/ofxUISpectrum.h; sourceTree = SOURCE_ROOT; };
 		650587CADC8DF1C8ACC6C85A /* ofxOscBundle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscBundle.h; path = ../of_v0.8.4_osx_release/addons/ofxOsc/src/ofxOscBundle.h; sourceTree = SOURCE_ROOT; };
 		65E09480F64B1811D13EAFC6 /* app.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = app.h; path = src/app.h; sourceTree = SOURCE_ROOT; };
@@ -726,6 +729,8 @@
 				65E09480F64B1811D13EAFC6 /* app.h */,
 				F61E2FA33DB68D77A29E36B7 /* utils.cpp */,
 				7C39EAC4AD92BF1D4365B8BC /* utils.h */,
+				5BE478F419F8AB1100C3ACCB /* kfmPlayer.cpp */,
+				5BE478F519F8AB1100C3ACCB /* kfmPlayer.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -915,6 +920,7 @@
 				CD63672907D93CAFED34406A /* ofxUITabBar.cpp in Sources */,
 				8BBCC76CF52F4ABF182D5111 /* ofxUITextArea.cpp in Sources */,
 				88643097EDADDCEE20180459 /* ofxUITextInput.cpp in Sources */,
+				5BE478F619F8AB1100C3ACCB /* kfmPlayer.cpp in Sources */,
 				4C1817940939B54992699A30 /* ofxUIToggle.cpp in Sources */,
 				E08A63C47639A623D1C12F4E /* ofxUIToggleMatrix.cpp in Sources */,
 				7E95FD33CCE401AA6C539A92 /* ofxUIValuePlotter.cpp in Sources */,

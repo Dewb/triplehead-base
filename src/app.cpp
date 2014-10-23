@@ -141,7 +141,6 @@ void thbApp::initGUI() {
     _pUI->setDrawBack(false);
     
     _pUI->setFont("GUI/UbuntuMono-B.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    //_pUI->addWidgetDown(new ofxUILabel("Kung Fu Montanez - @dewb", OFX_UI_FONT_MEDIUM));
     _pUI->addWidgetDown(new ofxUILabel(" _   ___________  ___ ", OFX_UI_FONT_MEDIUM));
     _pUI->addWidgetDown(new ofxUILabel("| | / /|  ___|  \\/  |   @dewb", OFX_UI_FONT_MEDIUM));
     _pUI->addWidgetDown(new ofxUILabel("| |/ / | |_  | .  . |", OFX_UI_FONT_MEDIUM));
@@ -150,11 +149,13 @@ void thbApp::initGUI() {
     _pUI->addWidgetDown(new ofxUILabel("\\_| \\_/\\_|   \\_|  |_/", OFX_UI_FONT_MEDIUM));
     
     _pUI->addSpacer(0, 12);
-     
-    //_pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_LARGE));
-    //_pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
-    //_pUI->addSpacer(0, 12);
-
+    
+#ifdef USE_FENSTER
+    _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addSpacer(0, 12);
+#endif
+    
     _pUI->addWidgetDown(new ofxUILabel("SOURCE VIDEO", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabelButton("Load 1", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addWidgetRight(new ofxUILabelButton("Load 2", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
@@ -329,11 +330,11 @@ void thbApp::update() {
                 }
                 updateSlider(_pUI, "DELAY", 0, FRAME_DELAY_MAX, newDelay);
             } else if (addr == "/montanez/loop") {
-                int newDelay = msg.getArgAsInt32(0);
+                int newLoop = msg.getArgAsInt32(0);
                 for (int i = 0; i < NUM_PLAYERS; i++) {
-                    players[i].setLoop(newDelay);
+                    players[i].setLoop(newLoop);
                 }
-                updateSlider(_pUI, "LOOP", 0, FRAME_LOOP_MAX, newDelay);
+                updateSlider(_pUI, "LOOP", 0, FRAME_LOOP_MAX, newLoop);
             } else if (addr == "/montanez/advance") {
                 float newAdvance = msg.getArgAsFloat(0);
                 for (int i = 0; i < NUM_PLAYERS; i++) {
