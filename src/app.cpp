@@ -140,18 +140,25 @@ void thbApp::initGUI() {
     _pUI->setWidgetSpacing(5.0);
     _pUI->setDrawBack(false);
     
-    _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    //_pUI->addWidgetDown(new ofxUILabel("Kung Fu Montanez - @dewb", OFX_UI_FONT_LARGE));
+    _pUI->setFont("GUI/UbuntuMono-B.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    //_pUI->addWidgetDown(new ofxUILabel("Kung Fu Montanez - @dewb", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel(" _   ___________  ___ ", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel("| | / /|  ___|  \\/  |   @dewb", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel("| |/ / | |_  | .  . |", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel("|    \\ |  _| | |\\/| |", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel("| |\\  \\| |   | |  | |", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel("\\_| \\_/\\_|   \\_|  |_/", OFX_UI_FONT_MEDIUM));
+    
     _pUI->addSpacer(0, 12);
      
-    _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
-    _pUI->addSpacer(0, 12);
+    //_pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_LARGE));
+    //_pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    //_pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("SOURCE VIDEO", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUILabelButton("Load 1...", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
-    _pUI->addWidgetRight(new ofxUILabelButton("Load 2...", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
-    _pUI->addWidgetRight(new ofxUILabelButton("Load 3...", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabelButton("Load 1", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetRight(new ofxUILabelButton("Load 2", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetRight(new ofxUILabelButton("Load 3", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabelButton("<<", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addWidgetRight(new ofxUILabelButton("<", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
     _pUI->addWidgetRight(new ofxUILabelButton(">", false, 0, 30, 0, 0, OFX_UI_FONT_LARGE));
@@ -509,19 +516,19 @@ void thbApp::guiEvent(ofxUIEventArgs &e) {
         if (slider) {
             _nMargin = slider->getScaledValue();
         }
-    } else if (name == "Load 1...") {
+    } else if (name == "Load 1") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton && !pButton->getValue())
         {
             loadFile(0);
         }
-    } else if (name == "Load 2...") {
+    } else if (name == "Load 2") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton && !pButton->getValue())
         {
             loadFile(1);
         }
-    } else if (name == "Load 3...") {
+    } else if (name == "Load 3") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton && !pButton->getValue())
         {
