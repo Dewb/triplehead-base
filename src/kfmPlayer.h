@@ -64,8 +64,6 @@ protected:
     int _nCurrentFrame;
     int _nCurrentLoopStart;
     
-    int _nFrameCushion;
-    
     int _bufferCaret;
     vector<ofFbo> _buffer;
     ofVideoPlayer _player;

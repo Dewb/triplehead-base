@@ -16,7 +16,6 @@ void kfmPlayer::init(string name) {
     
     _fFractionalAdvance = 0.0;
     
-    _nFrameCushion = 0;
     _movieLoaded = false;
     
 #ifdef USE_SYPHON
@@ -69,13 +68,6 @@ void kfmPlayer::blankBuffer() {
 void kfmPlayer::bufferMovieFrames(int requestedFrames) {
     int n = requestedFrames;
     //printf("Loading %d frames into buffer at %d (size %d)\n", n, _bufferCaret, FRAME_BUFFER_SIZE);
-    if (n > _nFrameCushion) {
-        n -= _nFrameCushion;
-        _nFrameCushion = 0;
-    } else if (_nFrameCushion > 0) {
-        _nFrameCushion -= n;
-        return;
-    }
     ofPushStyle();
     for (int ii=0; ii < n; ii++) {
         _player.nextFrame();
@@ -148,20 +140,10 @@ void kfmPlayer::publishScreens() {
 }
 
 void kfmPlayer::setDelay(int newDelay) {
-    if (newDelay > _nFrameDelay) {
-        bufferMovieFrames(2 * (newDelay - _nFrameDelay));
-    } else {
-        _nFrameCushion += _nFrameDelay - newDelay;
-    }
     _nFrameDelay = newDelay;
 }
 
 void kfmPlayer::setLoop(int newLoop) {
-    if (newLoop > _nFrameLoop) {
-        bufferMovieFrames(newLoop - _nFrameLoop);
-    } else {
-        _nFrameCushion += _nFrameLoop - newLoop;
-    }
     _nFrameLoop = newLoop;
 }
 
