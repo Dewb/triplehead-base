@@ -116,7 +116,8 @@ void kfmPlayer::update() {
 }
 
 ofFbo& kfmPlayer::getSingleScreen(int screen) {
-    int index = (_nCurrentFrame + screen * _nFrameDelay) % FRAME_BUFFER_SIZE;
+    int center = NUM_SCREENS / 2;
+    int index = (_nCurrentFrame + center * FRAME_DELAY_MAX + (screen - center) * _nFrameDelay) % FRAME_BUFFER_SIZE;
     if (index < 0) index = 0;
     return _buffer[index];
 }
