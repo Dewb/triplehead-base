@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 6,
+			"revision" : 7,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 678.0, 301.0, 858.0, 575.0 ],
+		"rect" : [ 582.0, 301.0, 858.0, 575.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -202,7 +202,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 52.25, 358.0, 55.0, 20.0 ],
-					"text" : "clip 0 90"
+					"text" : "clip 1 90"
 				}
 
 			}
@@ -1284,35 +1284,35 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "serialosc.maxpat",
-				"bootpath" : "/Users/dewb/dev/kfm/max",
+				"bootpath" : "/Users/dewb/ah/kfm/max",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "arcspread.maxpat",
-				"bootpath" : "/Users/dewb/dev/kfm/max",
+				"bootpath" : "/Users/dewb/ah/kfm/max",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "arcvalue.maxpat",
-				"bootpath" : "/Users/dewb/dev/kfm/max",
+				"bootpath" : "/Users/dewb/ah/kfm/max",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "arcvalue_float.maxpat",
-				"bootpath" : "/Users/dewb/dev/kfm/max",
+				"bootpath" : "/Users/dewb/ah/kfm/max",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "arcspinner.maxpat",
-				"bootpath" : "/Users/dewb/dev/kfm/max",
+				"bootpath" : "/Users/dewb/ah/kfm/max",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1

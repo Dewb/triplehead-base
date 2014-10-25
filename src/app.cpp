@@ -105,16 +105,16 @@ void thbApp::initGUI() {
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("PLAYBACK SPEED", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_RATE_MAX, ofGetFrameRate(),
-                                               "FRAME RATE", "0", FRAME_RATE_MAX_STR, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 1, FRAME_RATE_MAX, ofGetFrameRate(),
+                                               "FRAME RATE", "1", FRAME_RATE_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("DELAY SPREAD", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_DELAY_MAX, 7,
                                                "DELAY", "0", FRAME_DELAY_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("LOOP LENGTH", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_LOOP_MAX, 10,
-                                               "LOOP", "0", FRAME_LOOP_MAX_STR, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 3, FRAME_LOOP_MAX, 10,
+                                               "LOOP", "3", FRAME_LOOP_MAX_STR, OFX_UI_FONT_LARGE));
 
     _pUI->addWidgetDown(new ofxUILabel("ADVANCE RATE", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_ADVANCE_MAX, 3.0,
@@ -190,7 +190,9 @@ void thbApp::update() {
         if(_osc.getNextMessage(&msg)) {
             string addr = msg.getAddress();
             if (addr == "/montanez/fps") {
-                ofSetFrameRate(msg.getArgAsInt32(0));
+                int rate = msg.getArgAsInt32(0);
+                if (rate < 1) { rate == 1; }
+                ofSetFrameRate(rate);
                 updateSlider(_pUI, "FRAME RATE", 0, FRAME_RATE_MAX, ofGetFrameRate());
             } else if (addr == "/montanez/delay") {
                 int newDelay = msg.getArgAsInt32(0);
@@ -200,6 +202,7 @@ void thbApp::update() {
                 updateSlider(_pUI, "DELAY", 0, FRAME_DELAY_MAX, newDelay);
             } else if (addr == "/montanez/loop") {
                 int newLoop = msg.getArgAsInt32(0);
+                if (newLoop == 0) { newLoop = 3; }
                 for (int i = 0; i < NUM_PLAYERS; i++) {
                     players[i].setLoop(newLoop);
                 }
