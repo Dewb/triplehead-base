@@ -32,10 +32,13 @@ bool matchRadioButton(string widgetName, vector<string> names, int* pValue)
     return false;
 }
 
-void updateSlider(ofxUICanvas* pUI, string widgetName, int min, int max, int value) {
+void updateSlider(ofxUICanvas* pUI, string widgetName, float min, float max, float value) {
     ofxUISlider* pSlider = dynamic_cast<ofxUISlider*>(pUI->getWidget(widgetName));
+    
+    if (value < min) { value = min; }
+    if (value > max) { value = max; }
     if (pSlider) {
-        pSlider->setValue((value-min)/((max-min)*1.0));
+        pSlider->setValue(value);
     }
 }
 

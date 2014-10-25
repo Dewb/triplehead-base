@@ -31,6 +31,6 @@ void deletePointerCollection(std::list<T*> v) {
 
 void addRadioAndSetFirstItem(ofxUICanvas* pUI, std::string id, vector<string> options, int orientation, int w, int h);
 bool matchRadioButton(string widgetName, vector<string> names, int* pValue);
-void updateSlider(ofxUICanvas* pUI, string widgetName, int min, int max, int value);
+void updateSlider(ofxUICanvas* pUI, string widgetName, float min, float max, float value);
 
 float frand_bounded();

@@ -108,7 +108,7 @@ void thbApp::initGUI() {
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_RATE_MAX, ofGetFrameRate(),
                                                "FRAME RATE", "0", FRAME_RATE_MAX_STR, OFX_UI_FONT_LARGE));
 
-    _pUI->addWidgetDown(new ofxUILabel("DELAY", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("DELAY SPREAD", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_DELAY_MAX, 7,
                                                "DELAY", "0", FRAME_DELAY_MAX_STR, OFX_UI_FONT_LARGE));
 
@@ -116,7 +116,7 @@ void thbApp::initGUI() {
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_LOOP_MAX, 10,
                                                "LOOP", "0", FRAME_LOOP_MAX_STR, OFX_UI_FONT_LARGE));
 
-    _pUI->addWidgetDown(new ofxUILabel("ADVANCE", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("ADVANCE RATE", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, FRAME_ADVANCE_MAX, 3.0,
                                                "ADVANCE", "0", FRAME_ADVANCE_MAX_STR, OFX_UI_FONT_LARGE));
 
