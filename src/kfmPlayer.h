@@ -10,7 +10,7 @@
 #define __kfm__kfmPlayer__
 
 #define NUM_PLAYERS 3
-#define NUM_SCREENS 8
+#define NUM_SCREENS 4
 
 #define FRAME_RATE_MAX 90
 #define FRAME_DELAY_MAX 24

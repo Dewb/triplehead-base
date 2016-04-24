@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "547FB694471B1BB16C5B35052288A009885FB162",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "BFCEBA68FA34CC9D42430E49FB09A6EA416EC05F" : 0,
+    "547FB694471B1BB16C5B35052288A009885FB162" : 0,
+    "F4CCB893AFADB97238A965FD2F28717F1CAAE613" : 0,
+    "7E804D925461714118DB355C65BC964B41D94376" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C9B66407-D92F-4495-AC4B-796A53308D6A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "BFCEBA68FA34CC9D42430E49FB09A6EA416EC05F" : "..\/ah\/of_v0.8.4_osx_release\/addons\/ofxHapPlayer",
+    "547FB694471B1BB16C5B35052288A009885FB162" : "kfm\/",
+    "F4CCB893AFADB97238A965FD2F28717F1CAAE613" : "..\/ah\/of_v0.8.4_osx_release\/addons\/ofxSyphon",
+    "7E804D925461714118DB355C65BC964B41D94376" : "..\/ah\/of_v0.8.4_osx_release\/addons\/ofxUI"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "kfm",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "kfm.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Dewb\/triplehead-base",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "547FB694471B1BB16C5B35052288A009885FB162"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Dewb\/ofxUI",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7E804D925461714118DB355C65BC964B41D94376"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bangnoise\/ofxHapPlayer",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BFCEBA68FA34CC9D42430E49FB09A6EA416EC05F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/astellato\/ofxSyphon",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F4CCB893AFADB97238A965FD2F28717F1CAAE613"
+    }
+  ]
+}

@@ -35,6 +35,8 @@
 		5BCF5E7D19E238890030AB09 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BCF5E7C19E238890030AB09 /* Syphon.framework */; };
 		5BCF5E7E19E238E20030AB09 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5BCF5E7C19E238890030AB09 /* Syphon.framework */; };
 		5BE478F619F8AB1100C3ACCB /* kfmPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BE478F419F8AB1100C3ACCB /* kfmPlayer.cpp */; };
+		5BFF48041CCBED5800577FA9 /* ofxUICustomImageButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF48001CCBED5800577FA9 /* ofxUICustomImageButton.cpp */; };
+		5BFF48051CCBED5800577FA9 /* ofxUIIntSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF48021CCBED5800577FA9 /* ofxUIIntSlider.cpp */; };
 		604C523A711C3AEF879FF3CD /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0E039429146B4EB93A57D56 /* ofxUI2DGraph.cpp */; };
 		63104A8FA6F677625E904934 /* ofxUIImageSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 509C7A2914E79C9C40B5D5E3 /* ofxUIImageSampler.cpp */; };
 		765EB1D274CA2E34FEC9E5EA /* ofxUISortableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C25CA38A4A811D0A36543A1 /* ofxUISortableList.cpp */; };
@@ -195,6 +197,10 @@
 		5BCF5E7C19E238890030AB09 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Syphon.framework; path = ../of_v0.8.4_osx_release/addons/ofxSyphon/libs/Syphon/lib/osx/Syphon.framework; sourceTree = "<group>"; };
 		5BE478F419F8AB1100C3ACCB /* kfmPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kfmPlayer.cpp; sourceTree = "<group>"; };
 		5BE478F519F8AB1100C3ACCB /* kfmPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kfmPlayer.h; sourceTree = "<group>"; };
+		5BFF48001CCBED5800577FA9 /* ofxUICustomImageButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxUICustomImageButton.cpp; path = ../../ah/of_v0.8.4_osx_release/addons/ofxUI/src/ofxUICustomImageButton.cpp; sourceTree = "<group>"; };
+		5BFF48011CCBED5800577FA9 /* ofxUICustomImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxUICustomImageButton.h; path = ../../ah/of_v0.8.4_osx_release/addons/ofxUI/src/ofxUICustomImageButton.h; sourceTree = "<group>"; };
+		5BFF48021CCBED5800577FA9 /* ofxUIIntSlider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxUIIntSlider.cpp; path = ../../ah/of_v0.8.4_osx_release/addons/ofxUI/src/ofxUIIntSlider.cpp; sourceTree = "<group>"; };
+		5BFF48031CCBED5800577FA9 /* ofxUIIntSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxUIIntSlider.h; path = ../../ah/of_v0.8.4_osx_release/addons/ofxUI/src/ofxUIIntSlider.h; sourceTree = "<group>"; };
 		5F51E99B31833CED5B6D1CD0 /* ofxUISpectrum.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxUISpectrum.h; path = ../of_v0.8.4_osx_release/addons/ofxUI/src/ofxUISpectrum.h; sourceTree = SOURCE_ROOT; };
 		650587CADC8DF1C8ACC6C85A /* ofxOscBundle.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscBundle.h; path = ../of_v0.8.4_osx_release/addons/ofxOsc/src/ofxOscBundle.h; sourceTree = SOURCE_ROOT; };
 		65E09480F64B1811D13EAFC6 /* app.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = app.h; path = src/app.h; sourceTree = SOURCE_ROOT; };
@@ -593,6 +599,10 @@
 		D60F85FE32E11F4003B80627 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5BFF48001CCBED5800577FA9 /* ofxUICustomImageButton.cpp */,
+				5BFF48011CCBED5800577FA9 /* ofxUICustomImageButton.h */,
+				5BFF48021CCBED5800577FA9 /* ofxUIIntSlider.cpp */,
+				5BFF48031CCBED5800577FA9 /* ofxUIIntSlider.h */,
 				92B22D99DAFB3BAFC6607B5D /* ofxUI.h */,
 				D0E039429146B4EB93A57D56 /* ofxUI2DGraph.cpp */,
 				09DEE729E21B13CD9EBCC129 /* ofxUI2DGraph.h */,
@@ -885,6 +895,7 @@
 				3438F9FC4A9C0A6198DD16D3 /* ofxUI2DPad.cpp in Sources */,
 				0C542CD38AFE85F063C185F8 /* ofxUIBaseDraws.cpp in Sources */,
 				0C5BBE57DAD922DDC4B001DE /* ofxUIBiLabelSlider.cpp in Sources */,
+				5BFF48041CCBED5800577FA9 /* ofxUICustomImageButton.cpp in Sources */,
 				22274075F6852366F9194334 /* ofxUIButton.cpp in Sources */,
 				D5D9580B8A09918FE184DDD2 /* ofxUICanvas.cpp in Sources */,
 				C7BC8633121B448DB7D07758 /* ofxUICircleSlider.cpp in Sources */,
@@ -920,6 +931,7 @@
 				CD63672907D93CAFED34406A /* ofxUITabBar.cpp in Sources */,
 				8BBCC76CF52F4ABF182D5111 /* ofxUITextArea.cpp in Sources */,
 				88643097EDADDCEE20180459 /* ofxUITextInput.cpp in Sources */,
+				5BFF48051CCBED5800577FA9 /* ofxUIIntSlider.cpp in Sources */,
 				5BE478F619F8AB1100C3ACCB /* kfmPlayer.cpp in Sources */,
 				4C1817940939B54992699A30 /* ofxUIToggle.cpp in Sources */,
 				E08A63C47639A623D1C12F4E /* ofxUIToggleMatrix.cpp in Sources */,
@@ -1167,7 +1179,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1255,7 +1267,7 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.8;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
